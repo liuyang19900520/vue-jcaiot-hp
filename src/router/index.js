@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import WebView from '@/components/WebView';
+import HomeView from '@/components/web/HomeView';
+import MemberView from '@/components/web/MemberView';
 import AdminView from '@/components/AdminView';
 import LoginView from '@/components/LoginView';
 
@@ -11,16 +13,34 @@ export default new Router({
     routes: [{
             path: '/',
             name: 'WebView',
-            component: WebView
+            components: {
+                'root': WebView
+            },
+            children: [{
+                path: '/',
+                components: {
+                    'web': HomeView
+                }
+            }, {
+                path: '/members',
+                components: {
+                    'web': MemberView
+                }
+            }]
         }, {
             path: '/admin',
             name: 'AdminView',
-            component: AdminView
+            components: {
+                'root': AdminView
+            },
+
         },
         {
             path: '/login',
             name: 'LoginView',
-            component: LoginView
+            components: {
+                'root': LoginView
+            },
         }
     ]
 });

@@ -1,12 +1,12 @@
-export const state = () => ({
-  locales: ['en', 'jp', 'zh'],
-  locale: 'en'
-});
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-export const mutations = {
-  SET_LANG(state, locale) {
-    if (state.locales.includes(locale)) {
-      state.locale = locale
-    }
+import message from '@/store/modules/message';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  modules: {
+    message
   }
-};
+});

@@ -8,7 +8,7 @@ import LoginView from '@/components/LoginView';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [{
             path: '/',
@@ -23,6 +23,23 @@ export default new Router({
                 }
             }, {
                 path: '/members',
+                components: {
+                    'web': MemberView
+                }
+            }]
+        }, {
+            path: '/:lang',
+            name: 'WebView',
+            components: {
+                'root': WebView
+            },
+            children: [{
+                path: '/',
+                components: {
+                    'web': HomeView
+                }
+            }, {
+                path: '/:lang/members',
                 components: {
                     'web': MemberView
                 }
@@ -44,3 +61,23 @@ export default new Router({
         }
     ]
 });
+
+// router.beforeEach((to, from, next) => {
+//     let toPath = this.$route.path;
+//       console.log("toPath1", toPath);
+
+//       if (toPath.startsWith("/en")) {
+//         toPath = toPath.replace("/en", "");
+//       } else if (toPath.startsWith("/jp")) {
+//         toPath = toPath.replace("/en", "");
+//       }
+//       console.log("toPath2", toPath);
+//       let toLang = "";
+//       if (lang != "zh") {
+//         toLang = lang;
+//       }
+//       console.log("toLang", toLang);
+
+// });
+
+export default router;

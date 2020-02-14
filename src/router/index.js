@@ -62,22 +62,4 @@ const router = new Router({
     ]
 });
 
-// router.beforeEach((to, from, next) => {
-//     let toPath = this.$route.path;
-//       console.log("toPath1", toPath);
-
-//       if (toPath.startsWith("/en")) {
-//         toPath = toPath.replace("/en", "");
-//       } else if (toPath.startsWith("/jp")) {
-//         toPath = toPath.replace("/en", "");
-//       }
-//       console.log("toPath2", toPath);
-//       let toLang = "";
-//       if (lang != "zh") {
-//         toLang = lang;
-//       }
-//       console.log("toLang", toLang);
-
-// });
-
 export default router;

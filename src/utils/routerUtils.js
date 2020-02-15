@@ -1,4 +1,4 @@
-var routerUtils = {
+const routerUtils = {
     link2page(url) {
         console.log("现在路由", this.$route.path);
         // let routeLang = this.$route.params.lang;

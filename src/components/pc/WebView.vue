@@ -39,7 +39,6 @@ import routerUtils from "../../utils/routerUtils";
 export default {
   name: "WebView",
   data: () => ({
-    drawer: null,
     items: [
       { name: "en", title: "English" },
       { name: "jp", title: "日本語" },
@@ -53,8 +52,6 @@ export default {
       let fromLang = this.$store.state.message.lang;
       this.$store.dispatch("message/setLang", lang);
       let toPath = this.createLangUrl(fromLang);
-
-      console.log(toPath);
       this.$router.push(toPath);
       this.$i18n.locale = lang;
     }

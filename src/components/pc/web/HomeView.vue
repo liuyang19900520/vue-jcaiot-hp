@@ -1,24 +1,27 @@
 <template>
-  <div>Home</div>
+  <div>{{banner}}</div>
 </template>
 
 <script>
 export default {
-  name: "HelloI18n",
   props: {
     source: String
   },
   data: () => ({
-    drawer: null,
-    items: [
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me 2" }
-    ]
+    banner: null
   }),
   created() {
     this.$vuetify.theme.dark = true;
+    this.getBanner();
+  },
+  methods: {
+    getBanner: function() {
+      let lang = this.$store.state.message.lang;
+      this.$api.banner.selectBanner(lang).then(res => {
+        console.log(res);
+        this.banner = res.data.banner;
+      });
+    }
   }
 };
 </script>

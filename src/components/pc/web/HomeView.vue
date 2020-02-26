@@ -22,6 +22,9 @@ export default {
         this.banner = res.data.banner;
       });
     }
+  },
+  watch: {
+    "$route.path": "getBanner"
   }
 };
 </script>

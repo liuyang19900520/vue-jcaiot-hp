@@ -14,7 +14,7 @@ const routerUtils = {
         }
         this.$router.push(url);
     },
-    createLangUrl(fromLang) {
+    createLangUrl() {
         let toLang = this.$store.state.message.lang;
         let toPath = this.$route.path;
         if (toPath.startsWith("/en")) {

@@ -49,9 +49,8 @@ export default {
     link2page: routerUtils.link2page,
     createLangUrl: routerUtils.createLangUrl,
     changeLang: function(lang) {
-      let fromLang = this.$store.state.message.lang;
       this.$store.dispatch("message/setLang", lang);
-      let toPath = this.createLangUrl(fromLang);
+      let toPath = this.createLangUrl();
       this.$router.push(toPath);
       this.$i18n.locale = lang;
     }

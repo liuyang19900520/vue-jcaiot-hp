@@ -4,16 +4,16 @@ import { LogEntry } from '@nestjs/common/interfaces/external/kafka-options.inter
 
 export class AddUserDTO {
     readonly username: string;
-    readonly admin: boolean;
+    readonly admin: string;
     readonly password: string;
-    readonly userId: number;
+    readonly email: string;
 }
 
 export interface User extends Document {
     username?: string;
-    admin?: boolean;
+    admin?: string;
     password?: string;
-    userId?: number;
+    email?: string;
 }
 
 
@@ -22,12 +22,12 @@ export const UserSchema = new Schema({
         type: String
     },
     admin: {
-        type: Boolean
+        type: String
     },
     password: {
         type: String
     },
-    userId: {
-        type: Number
+    email: {
+        type: String
     }
 });

@@ -2,6 +2,12 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { BannerService } from './banner.service';
 import { Banner } from './interfaces/banner.interface';
+import {
+    ArgumentsHost,
+    Catch,
+    ExceptionFilter,
+    HttpException,
+} from '@nestjs/common';
 
 @Controller('banners')
 export class BannerController {
@@ -19,6 +25,7 @@ export class BannerController {
 
     @Get(':lang')
     async findOne(@Param('lang') lang: string): Promise<Banner> {
-        return this.bannerService.findOne(lang);
+        throw new HttpException("124", 200);
+        // return this.bannerService.findOne(lang);
     }
 }

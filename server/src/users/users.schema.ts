@@ -1,5 +1,5 @@
 import { Document, Schema } from 'mongoose';
-import { LogEntry } from '@nestjs/common/interfaces/external/kafka-options.interface';
+import { Exclude  } from 'class-transformer';
 
 
 export class AddUserDTO {

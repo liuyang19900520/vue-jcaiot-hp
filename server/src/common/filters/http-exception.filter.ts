@@ -1,17 +1,21 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, UnauthorizedException } from '@nestjs/common';
 import { SystemException } from '../exceptions/system.exception';
+import { ApiErrorCode } from '../exceptions/api-error-code';
 
-@Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter {
+@Catch()
+export class HttpExceptionFilter implements ExceptionFilter<Error> {
 
-  catch(exception, host: ArgumentsHost) {
+  catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    const status = exception.getStatus()
+    let status = 500;
+    if (exception instanceof HttpException) {
+      status = exception.getStatus();
+    }
+    console.log(exception);
 
     if (exception instanceof SystemException) {
-
       response
         .status(status)
         .json({
@@ -22,14 +26,24 @@ export class HttpExceptionFilter implements ExceptionFilter {
             path: request.url
           }
         });
-
-    } else {
-
+    } else if (exception instanceof UnauthorizedException) {
+      response
+        .status(status)
+        .json({
+          code: ApiErrorCode.TOKEN_INVALID,
+          message: "TOKEN_INVALID",
+          data: {
+            date: new Date().toLocaleDateString(),
+            path: request.url
+          }
+        });
+    }
+    else {
       response
         .status(status)
         .json({
           code: "1",
-          message: "request failed",
+          message: exception.message,
           data: {
             date: new Date().toLocaleDateString(),
             path: request.url

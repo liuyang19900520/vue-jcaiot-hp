@@ -1,12 +1,14 @@
 import { Document, Schema } from 'mongoose';
-import { Exclude  } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 
 
 export class AddUserDTO {
     readonly username: string;
     readonly admin: string;
-    readonly password: string;
+    password: string;
     readonly email: string;
+    salt: string;
+    flag: string;
 }
 
 export interface User extends Document {
@@ -14,6 +16,8 @@ export interface User extends Document {
     admin?: string;
     password?: string;
     email?: string;
+    salt?: string;
+    flag?: String;
 }
 
 
@@ -28,6 +32,12 @@ export const UserSchema = new Schema({
         type: String
     },
     email: {
+        type: String
+    },
+    salt: {
+        type: String
+    },
+    flag: {
         type: String
     }
 });

@@ -16,11 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: any) {
-        console.log(payload);
-        if (payload) {
-
-            throw new SystemException(ApiErrorCode.TOKEN_INVALID, "TOKEN_INVALID", HttpStatus.UNAUTHORIZED);
-        }
-        return { admin: payload.sub, username: payload.username };
+        return { username: payload.sub, admin: payload.admin };
     }
 }

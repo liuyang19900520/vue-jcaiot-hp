@@ -1,9 +1,10 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, UnauthorizedException } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, UnauthorizedException, Inject } from '@nestjs/common';
 import { SystemException } from '../exceptions/system.exception';
 import { ApiErrorCode } from '../exceptions/api-error-code';
-
+import { Logger } from 'winston';
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
+  constructor(@Inject('winston') private readonly logger: Logger) { }
 
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -13,8 +14,11 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
     }
-    console.log(exception);
-
+    if (status != 500) {
+      this.logger.warn(exception);
+    } else {
+      this.logger.error(exception);
+    }
     if (exception instanceof SystemException) {
       response
         .status(status)
@@ -22,7 +26,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: exception.getErrorCode(),
           message: exception.getErrorMessage(),
           data: {
-            date: new Date().toLocaleDateString(),
+            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
             path: request.url
           }
         });
@@ -33,7 +37,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: ApiErrorCode.TOKEN_INVALID,
           message: "TOKEN_INVALID",
           data: {
-            date: new Date().toLocaleDateString(),
+            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
             path: request.url
           }
         });
@@ -45,7 +49,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: "1",
           message: exception.message,
           data: {
-            date: new Date().toLocaleDateString(),
+            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
             path: request.url
           }
         });

@@ -1,18 +1,12 @@
-import { Controller, Get, Post, Body, Param, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, HttpStatus, Inject } from '@nestjs/common';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { BannerService } from './banner.service';
 import { Banner } from './interfaces/banner.interface';
 import { SystemException } from '../common/exceptions/system.exception'
-import {
-    ArgumentsHost,
-    Catch,
-    ExceptionFilter,
-    HttpException,
-} from '@nestjs/common';
-
+import { Logger } from 'winston';
 @Controller('banners')
 export class BannerController {
-    constructor(private readonly bannerService: BannerService) { }
+    constructor(private readonly bannerService: BannerService, @Inject('winston') private readonly logger: Logger) { }
 
     @Post()
     async create(@Body() createCatDto: CreateBannerDto) {
@@ -21,6 +15,7 @@ export class BannerController {
 
     @Get()
     async findAll(): Promise<Banner[]> {
+        this.logger.error("teset");
         return this.bannerService.findAll();
     }
 

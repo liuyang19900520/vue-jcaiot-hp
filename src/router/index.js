@@ -17,12 +17,14 @@ import LoginView from '@/components/pc/LoginView';
  */
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-  if(typeof(location)=="string"){
-    var Separator = "&";
-    if(location.indexOf('?')==-1) { Separator='?'; }
-    location = location + Separator + "random=" + Math.random();
-  }
-  return routerPush.call(this, location).catch(error=> error)
+    if (typeof (location) == "string") {
+        var Separator = "&";
+        if (location.indexOf('?') == -1) {
+            Separator = '?';
+        }
+        location = location + Separator + "random=" + Math.random();
+    }
+    return routerPush.call(this, location).catch(error => error)
 }
 
 Vue.use(Router);
@@ -64,20 +66,23 @@ const router = new Router({
                 }
             }, {
                 path: '/:lang/members',
+                params: {
+                    lang: ['jp', 'zh', 'en']
+                },
                 components: {
                     'web': MemberView,
                     'web-mobile': MemberViewMobile,
                 }
             }]
         }, {
-            path: '/admin',
+            path: '/admin/home',
             name: 'AdminView',
             components: {
                 'root': AdminView
             },
         },
         {
-            path: '/login',
+            path: '/admin/login',
             name: 'LoginView',
             components: {
                 'root': LoginView

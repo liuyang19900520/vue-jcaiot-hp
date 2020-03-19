@@ -5,11 +5,18 @@ import * as winston from 'winston'
 import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
-
+import { RedisModule } from 'nestjs-redis'
 
 
 @Module({
   imports: [
+    RedisModule.register({
+      name: 'test',
+      host: '192.168.0.14',
+      port: 6379,
+      db: 0
+
+    }),
     MongooseModule.forRoot('mongodb+srv://liuyang19900520:1990052099@jcaiot-3aplq.mongodb.net/jcaiot?retryWrites=true&w=majority'),
     WinstonModule.forRoot({
       transports: [

@@ -21,8 +21,8 @@ export class BannerController {
 
     @Get(':lang')
     async findOne(@Param('lang') lang: string): Promise<Banner> {
-        throw new SystemException("12345", "文字好", HttpStatus.OK);
+        // throw new SystemException("12345", "文字好", HttpStatus.OK);
 
-        // return this.bannerService.findOne(lang);
+        return this.bannerService.findOne(lang);
     }
 }

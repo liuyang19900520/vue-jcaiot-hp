@@ -37,7 +37,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: ApiErrorCode.TOKEN_INVALID,
           message: "TOKEN_INVALID",
           data: {
-            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
+            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
             path: request.url
           }
         });
@@ -49,7 +49,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: "1",
           message: exception.message,
           data: {
-            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
+            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
             path: request.url
           }
         });

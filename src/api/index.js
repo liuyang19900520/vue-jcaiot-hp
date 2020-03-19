@@ -3,8 +3,10 @@
  */
 
 import banner from './bannersApi';
+import auth from './authApi';
 
 // 导出接口
 export default {
-    banner
+    banner,
+    auth
 }

@@ -1,0 +1,15 @@
+NODE_ENV=development
+LOGS_PATH=src/var/log
+APP_PUBLIC_PORT=3000
+
+###> Database
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=backend
+DB_USER=backend
+DB_PASSWORD=backend
+
+###> Redis
+REDIS_HOST=192.168.0.16
+REDIS_PORT=6379

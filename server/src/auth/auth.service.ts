@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { RedisService } from 'nestjs-redis'
+import { RedisService } from '../cache/redis.service'
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
@@ -19,13 +19,9 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { admin: user.admin, sub: user.username };
-
     let access_token = this.jwtService.sign(payload);
-
-    const client = await this.redisService.getClient('test');
+    const client = await this.redisService.getClient();
     client.set("access_token", access_token);
-
-
     return {
       access_token: access_token
     };

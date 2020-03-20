@@ -11,11 +11,8 @@ import { RedisModule } from 'nestjs-redis'
 @Module({
   imports: [
     RedisModule.register({
-      name: 'test',
-      host: '192.168.0.14',
-      port: 6379,
-      db: 0
-
+      host: process.env.REDIS_HOST,
+      port: parseInt(process.env.REDIS_PORT, 6379),
     }),
     MongooseModule.forRoot('mongodb+srv://liuyang19900520:1990052099@jcaiot-3aplq.mongodb.net/jcaiot?retryWrites=true&w=majority'),
     WinstonModule.forRoot({

@@ -1,0 +1,6 @@
+export const enum SystemErrors {
+  REST_VALIDATION_ERROR = 200,
+  UNIQUE_CONSTRAINT_ALERT = 240,
+  OTHER = 1000,
+  ROUTE_NOT_FOUND = 1001,
+}

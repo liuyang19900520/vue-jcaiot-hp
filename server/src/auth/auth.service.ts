@@ -21,7 +21,9 @@ export class AuthService {
     const payload = { admin: user.admin, sub: user.username };
     let access_token = this.jwtService.sign(payload);
     const client = await this.redisService.getClient();
-    client.set("access_token", access_token);
+    client.hset("access_token", "access_token", access_token);
+    client.hset("access_token", "admin", user.admin);
+    client.hset("access_token", "usrename", user.username);
     return {
       access_token: access_token
     };

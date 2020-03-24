@@ -2,14 +2,15 @@ import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/com
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 import { RedisService } from '../cache/redis.service'
-import { json } from 'express';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
 
     constructor() { super(); }
-    private readonly redisService: RedisService
+    private readonly redisService: RedisService;
+    private readonly jwtService: JwtService;
     canActivate(
         context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
@@ -23,6 +24,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
             if (error instanceof UnauthorizedException) {
                 const client = this.redisService.getClient();
                 let redisData = client.hgetall(accessToken);
+                console.log(JSON.stringify(redisData));
+                const payload = { admin: redisData["admin"], sub: redisData["username"] };
+                let access_token = this.jwtService.sign(payload);
+
 
             } else {
                 throw error;

@@ -2,6 +2,8 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpException, UnauthorizedExcep
 import { SystemException } from '../exceptions/system.exception';
 import { ApiErrorCode } from '../exceptions/api-error-code';
 import { Logger } from 'winston';
+import { RedisService } from '../../cache/redis.service'
+import { JwtService } from '@nestjs/jwt';
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
   constructor(@Inject('winston') private readonly logger: Logger) { }
@@ -31,6 +33,21 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           }
         });
     } else if (exception instanceof UnauthorizedException) {
+
+      // let x = super.canActivate(context);
+      // console.log(x);
+
+      // const request = context.switchToHttp().getRequest();
+      // let accessToken = request.header('Authorization');
+      // const client = this.redisService.getClient();
+      // let redisData = client.hgetall(accessToken);
+      // console.log(redisData);
+      // const payload = { admin: redisData["admin"], sub: redisData["username"] };
+      // let access_token = this.jwtService.sign(payload);
+
+
+
+
       response
         .status(status)
         .json({

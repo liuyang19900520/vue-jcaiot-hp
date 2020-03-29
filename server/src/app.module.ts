@@ -1,19 +1,18 @@
-import { Module, NestModule, MiddlewareConsumer, } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
-import * as winston from 'winston'
+import * as winston from 'winston';
 import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
-import { RedisModule } from 'nestjs-redis'
 
 
 @Module({
   imports: [
-    RedisModule.register({
-      host: '192.168.0.16',
-      port: 6379
-    }),
+    // RedisModule.register({
+    //   host: '192.168.0.16',
+    //   port: 6379
+    // }),
     MongooseModule.forRoot('mongodb+srv://liuyang19900520:1990052099@jcaiot-3aplq.mongodb.net/jcaiot?retryWrites=true&w=majority'),
     WinstonModule.forRoot({
       transports: [
@@ -39,12 +38,12 @@ import { RedisModule } from 'nestjs-redis'
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike(),
           ),
-        })
+        }),
         // other transports...
       ],
       // options
     }),
-    BannerModule, AuthModule
+    BannerModule, AuthModule,
   ],
 })
 export class AppModule {

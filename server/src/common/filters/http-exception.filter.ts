@@ -45,19 +45,19 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
       // const payload = { admin: redisData["admin"], sub: redisData["username"] };
       // let access_token = this.jwtService.sign(payload);
 
-
-
-
       response
         .status(status)
         .json({
-          code: ApiErrorCode.TOKEN_INVALID,
-          message: "TOKEN_INVALID",
+          code: "1",
+          message: exception.message,
           data: {
             date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
             path: request.url
           }
         });
+
+
+
     }
     else {
       response

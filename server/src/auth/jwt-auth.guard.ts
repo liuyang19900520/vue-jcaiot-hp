@@ -1,62 +1,51 @@
-import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import { Observable } from 'rxjs';
-import { RedisService } from '../cache/redis.service'
-import { JwtService } from '@nestjs/jwt';
-import { async } from 'rxjs/internal/scheduler/async';
 
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
 
-    constructor(private readonly redisService: RedisService,
-        private readonly jwtService: JwtService) { super(); }
-
-    canActivate(
-        context: ExecutionContext,
-    ): boolean {
-        const request = context.switchToHttp().getRequest();
-        let accessToken = request.header('Authorization');
-        try {
-            let playddd = this.jwtService.verify(accessToken);
-            return true;
-        }
-        catch (error) {
-
-            if (error instanceof JsonWebTokenError) {
-                console.log(error);
-                const client = this.redisService.getClient();
-
-                const getHash = async () => {
-                    return await client.hgetall(accessToken)
-                }
-
-                let hash = getHash();
-                console.log(hash);
-                if (!hash["access_token"]) {
-                    console.log("there is no data in redis");
-                    throw new UnauthorizedException();
-
-                }
-                const payload = { admin: hash["admin"], sub: hash["username"] };
-                let access_token2 = this.jwtService.sign(payload);
-                console.log(payload);
-
-                // getHash().then(
-                //     (hash) => {
+  // constructor(private readonly redisService: RedisService,
+  //     private readonly jwtService: JwtService) { super(); }
 
 
-                //     }
-                // );
+  // canActivate(
+  //     context: ExecutionContext,
+  // ): boolean | Promise<boolean> {
+  //     const client = this.redisService.getClient();
+  //     const request = context.switchToHttp().getRequest();
+  //     let accessToken = request.header('Authorization');
 
 
-            }
+  //     async function checkRedis(accessToken) {
+  //         let isRedis = await client.hgetall(accessToken, (err, hash) => {
+  //             if (!hash["access_token"]) {
+  //                 console.log("there is no data in redis");
+  //                 return false;
+  //             }
+  //             const payload = { admin: hash["admin"], sub: hash["username"] };
+  //             let access_token2 = this.jwtService.sign(payload);
+  //             client.hset("access_token", "access_token", access_token2);
+  //             client.hset("access_token", "admin", payload.admin);
+  //             client.hset("access_token", "usrename", payload.sub);
+  //             client.expire('access_token', 6000)
+  //             console.log(payload);
 
-        }
+  //             return true;
 
-        return true;
+  //         });
+  //         return isRedis;
+  //     }
+  //     try {
+  //         let playddd = this.jwtService.verify(accessToken);
+  //         return true;
+  //     }
+  //     catch (error) {
+  //         checkRedis(accessToken).then((data) => {
+  //             return data;
+  //         });
 
-    }
 
+  //     }
+  // }
 }

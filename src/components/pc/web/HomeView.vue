@@ -11,7 +11,6 @@ export default {
     banner: null
   }),
   created() {
-    this.$vuetify.theme.dark = true;
     this.getBanner();
   },
   methods: {

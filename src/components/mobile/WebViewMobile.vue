@@ -27,7 +27,7 @@
       <v-spacer></v-spacer>
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
-          <v-btn depressed dark v-on="on">
+          <v-btn depressed  v-on="on">
             {{$t("lang")}}
             <v-icon>mdi-menu-down</v-icon>
           </v-btn>
@@ -78,7 +78,6 @@ export default {
     }
   },
   created() {
-    this.$vuetify.theme.dark = true;
   }
 };
 </script>

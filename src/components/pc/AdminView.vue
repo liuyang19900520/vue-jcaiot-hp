@@ -27,7 +27,6 @@
     <v-app-bar
       app
       color="indigo"
-      dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Application</v-toolbar-title>

@@ -2,12 +2,12 @@ import axios from 'axios';
 import router from '../router';
 import storage from '../store/storage.js';
 
-var instance = axios.create({
+const instance = axios.create({
     baseURL: 'http://localhost:3000/',
     timeout: 30000
 });
 
-/** 
+/**
  * 跳转登录页
  * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
@@ -25,8 +25,8 @@ const errorHandle = (status, other) => {
         case 401:
             toLogin();
             break;
-            // 403 token过期
-            // 清除token并跳转登录页
+        // 403 token过期
+        // 清除token并跳转登录页
         case 403:
             console.log('登录过期，请重新登录');
             storage.remove("token");
@@ -34,7 +34,7 @@ const errorHandle = (status, other) => {
                 toLogin();
             }, 1000);
             break;
-            // 404请求不存在
+        // 404请求不存在
         case 404:
             console.log('请求的资源不存在');
             break;
@@ -45,7 +45,7 @@ const errorHandle = (status, other) => {
 
 //请求拦截器
 instance.interceptors.request.use(function (config) {
-    // // 在发送请求之前做些什么
+    // 在发送请求之前做些什么
     var token = storage.get("token");
     if (token != null) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -61,11 +61,8 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(
     // 请求成功
     res => {
-        res.status === 200 ? Promise.resolve(res) : Promise.reject(res)
-        if (res.headers.token != null) {
-            storage.set("token", res.headers.token);
-        }
-        return res
+        res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.dta)
+        return res.data;
     },
     // 请求失败
     error => {
@@ -84,4 +81,5 @@ instance.interceptors.response.use(
             // store.commit('changeNetwork', false);
         }
     });
+
 export default instance;

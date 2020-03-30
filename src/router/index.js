@@ -8,6 +8,7 @@ import MemberView from '@/components/pc/web/MemberView';
 import MemberViewMobile from '@/components/mobile/web/MemberViewMobile';
 import AdminView from '@/components/pc/AdminView';
 import LoginView from '@/components/pc/LoginView';
+import BannerView from '@/components/pc/admin/BannerView';
 
 
 /**
@@ -80,6 +81,15 @@ const router = new Router({
         components: {
             'root': AdminView
         },
+        children: [
+            {
+                path: '/admin/dashboard/banner',
+                components: {
+                    'root': AdminView,
+                    'dashboard': BannerView
+                }
+            }
+        ]
     },
         {
             path: '/admin/login',

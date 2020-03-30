@@ -14,6 +14,9 @@ const routerUtils = {
         }
         this.$router.push(url);
     },
+    link2pageAdmin(url) {
+        this.$router.push(url);
+    },
     createLangUrl() {
         let toLang = this.$store.state.message.lang;
         let toPath = this.$route.path;

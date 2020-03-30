@@ -1,10 +1,11 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { MenuModule } from './menu/menu.module';
 
 
 @Module({
@@ -43,7 +44,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
       ],
       // options
     }),
-    BannerModule, AuthModule,
+    BannerModule, AuthModule, MenuModule,
   ],
 })
 export class AppModule {

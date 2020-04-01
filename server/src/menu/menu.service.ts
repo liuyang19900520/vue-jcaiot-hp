@@ -18,7 +18,7 @@ export class MenuService {
     return this.menuModel.find().exec();
   }
 
-  async findOne(lang: string): Promise<Menu> {
-    return this.menuModel.findOne({ lang: lang });
+  async listMenu(adminType: string): Promise<Menu[]> {
+    return this.menuModel.find({ admin: adminType });
   }
 }

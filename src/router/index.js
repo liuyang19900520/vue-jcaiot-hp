@@ -1,15 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import WebView from '@/components/pc/WebView';
-import WebViewMobile from '@/components/mobile/WebViewMobile';
-import HomeView from '@/components/pc/web/HomeView';
-import HomeViewMobile from '@/components/mobile/web/HomeViewMobile';
-import MemberView from '@/components/pc/web/MemberView';
-import MemberViewMobile from '@/components/mobile/web/MemberViewMobile';
-import AdminView from '@/components/pc/AdminView';
-import LoginView from '@/components/pc/LoginView';
-import BannerView from '@/components/pc/admin/BannerView';
 
+import MobileLayout from "../layout/MobileLayout";
+import PcLayout from "../layout/WebLayout";
 
 /**
  * 重写路由的push方法
@@ -34,71 +27,12 @@ const router = new Router({
     mode: 'history',
     routes: [{
         path: '/',
-        name: 'WebView',
         components: {
-            'root': WebView,
-            'root-mobile': WebViewMobile,
-        },
-        children: [{
-            path: '/',
-            components: {
-                'web': HomeView,
-                'web-mobile': HomeViewMobile,
-            }
-        }, {
-            path: '/members',
-            components: {
-                'web': MemberView,
-                'web-mobile': MemberViewMobile,
-            }
-        }]
-    }, {
-        path: '/:lang',
-        name: 'WebView',
-        components: {
-            'root': WebView,
-            'root-mobile': WebViewMobile,
-        },
-        children: [{
-            path: '/',
-            components: {
-                'web': HomeView,
-                'web-mobile': HomeViewMobile,
-            }
-        }, {
-            path: '/:lang/members',
-            params: {
-                lang: ['jp', 'zh', 'en']
-            },
-            components: {
-                'web': MemberView,
-                'web-mobile': MemberViewMobile,
-            }
-        }]
-    }, {
-        path: '/admin/dashboard',
-        name: 'AdminView',
-        components: {
-            'root': AdminView
-        },
-        children: [
-            {
-                path: '/admin/dashboard/banner',
-                components: {
-                    'root': AdminView,
-                    'dashboard': BannerView
-                }
-            }
-        ]
-    },
-        {
-            path: '/admin/login',
-            name: 'LoginView',
-            components: {
-                'root': LoginView
-            },
+            'root-pc': PcLayout,
+            'root-mobile': MobileLayout,
         }
-    ]
+    }]
+
 });
 
 export default router;

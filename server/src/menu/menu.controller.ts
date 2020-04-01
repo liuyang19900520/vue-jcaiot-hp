@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { MenuService } from './menu.service';
 import { Menu } from './interfaces/menu.interface';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('menus')
 export class MenuController {
@@ -13,13 +14,12 @@ export class MenuController {
     await this.menuService.create(createCatDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<Menu[]> {
-    return this.menuService.findAll();
+  async listMenu(@Request() req): Promise<Menu[]> {
+    const admin = req.user.admin;
+    return this.menuService.listMenu(admin);
   }
 
-  @Get(':lang')
-  async findOne(@Param('lang') lang: string): Promise<Menu> {
-    return this.menuService.findOne(lang);
-  }
+
 }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="!isMobile()">
-            <router-view name="root"></router-view>
+            <router-view name="root-pc"></router-view>
         </div>
         <div v-if="isMobile()">
             <router-view name="root-mobile"></router-view>

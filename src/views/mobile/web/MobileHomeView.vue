@@ -1,10 +1,8 @@
 <template>
-    <div>{{banner}}<span>这是我们的Home组件</span></div>
+    <div>{{banner}}<span>这是我们的Mobile Home组件</span></div>
 </template>
 
 <script>
-
-
     export default {
         props: {
             source: String

@@ -1,15 +1,10 @@
 import AdminLayout from "../layout/AdminLayout";
 
 const adminRouter = {
-    path: '/',
-    component: AdminLayout,
-    name: 'AdminLayout',
-    children: [{
-        path: '/',
-        components: {
-            'admin': AdminLayout,
-        },
-    }]
+    path: '/admin',
+    components: {
+        'root-pc': AdminLayout,
+    },
 }
 
 export default adminRouter

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import adminRouter from "./admin";
+import LoginView from "../views/pc/LoginView";
+import webRouter from "./web";
 
-import MobileLayout from "../layout/MobileLayout";
-import PcLayout from "../layout/WebLayout";
 
 /**
  * 重写路由的push方法
@@ -26,12 +27,11 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes: [{
-        path: '/',
+        path: '/login',
         components: {
-            'root-pc': PcLayout,
-            'root-mobile': MobileLayout,
+            'root-pc': LoginView,
         }
-    }]
+    }, webRouter, adminRouter]
 
 });
 

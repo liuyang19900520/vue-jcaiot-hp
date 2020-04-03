@@ -1,5 +1,8 @@
 <template>
-    <router-view name="mobile"></router-view>
+    <div>
+        <div>这是mobile的Layout</div>
+        <router-view name="mobile-web"></router-view>
+    </div>
 </template>
 
 <script>

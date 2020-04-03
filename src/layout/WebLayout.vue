@@ -23,7 +23,7 @@
         <v-content>
             <v-container class="fill-height" fluid>
                 <input type="text" v-model="$store.state.message.lang"/>
-                <router-view name="web"></router-view>
+                <router-view name="pc-web"></router-view>
             </v-container>
         </v-content>
         <v-footer padless>
@@ -69,7 +69,7 @@
         }),
         methods: {
             link2pageLogin: function () {
-                this.$router.push("/admin/login")
+                this.$router.push("/login")
             },
             link2page: routerUtils.link2page,
             createLangUrl: routerUtils.createLangUrl,

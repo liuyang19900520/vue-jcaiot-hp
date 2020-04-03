@@ -6,7 +6,7 @@
                 <v-row align="center" justify="center">
                     <v-col cols="12" sm="8" md="4">
                         <v-card class="elevation-12">
-                            <v-toolbar color="primary"  flat>
+                            <v-toolbar color="primary" flat>
                                 <v-toolbar-title>Login Form</v-toolbar-title>
                                 <v-spacer/>
                             </v-toolbar>
@@ -59,15 +59,15 @@
             login: function () {
                 this.$api.auth.login(this.username, this.password).then(res => {
                     console.log(res.data.accessToken);
-                    storage.set("accessToken",res.data.accessToken);
-                    this.$router.push("/admin/dashboard");
+                    storage.set("accessToken", res.data.accessToken);
+                    this.$router.push("/admin");
                 }).catch(error => {
                     console.log(error);
                     this.loginError = true;
                 });
             },
-            focusfns:function () {
-                this.loginError=false;
+            focusfns: function () {
+                this.loginError = false;
             }
         }
     };

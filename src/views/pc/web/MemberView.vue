@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "HelloI18n",
+  name: "MemberView",
   props: {
     source: String
   },

@@ -25,7 +25,7 @@ const webRouter =
                     'mobile-web': MobileHomeView,
                 },
             }, {
-                path: '/params-with-regex/:lang(jp|en)',
+                path: '/:lang(jp|en)',
                 components: {
                     'pc-web': HomeView,
                     'mobile-web': MobileHomeView,

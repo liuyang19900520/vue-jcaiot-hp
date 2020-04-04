@@ -5,7 +5,15 @@
                 app
         >
             <v-list dense>
-                <v-list-item link @click="link2pageAdmin('/admin/dashboard/banner')">
+
+
+                <v-list-item v-for="(menu,index) in menus" :key="index" link @click="link2pageAdmin(menu.link)">
+                    <v-list-item-content>
+                        <v-list-item-title>{{menu.title}}++++{{index}}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item link @click="link2pageAdmin('/admin/banner')">
                     <v-list-item-action>
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-action>
@@ -44,9 +52,20 @@
         name: "AdminLayout",
         data: () => ({
             drawer: null,
+            menus: null,
         }),
         methods: {
             link2pageAdmin: routerUtils.link2pageAdmin,
+            listMenus() {
+
+            }
+        }, created() {
+            let self = this;
+            this.$api.auth.listMenus().then((res) => {
+                    console.log(res)
+                    self.menus = res.data;
+                }
+            )
         }
     }
 </script>

@@ -18,7 +18,6 @@
         methods: {
             getBanner: function () {
                 let lang = this.$store.state.message.lang;
-                console.log("lang==========", lang);
                 this.$api.banner.selectBanner(lang).then(res => {
                     console.log(res);
                     this.banner = res.data.banner;

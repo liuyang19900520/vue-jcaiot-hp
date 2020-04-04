@@ -1,4 +1,5 @@
 import axios from '../utils/axiosUtils';
+
 const auth = {
     login(username, password) {
         return axios({
@@ -12,6 +13,11 @@ const auth = {
                 'content-type': 'application/json'
             }
         });
+    },
+    listMenus() {
+        return axios.get("/menus")
     }
+
+
 };
 export default auth;

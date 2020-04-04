@@ -13,7 +13,7 @@ const instance = axios.create({
  */
 const toLogin = () => {
     router.replace({
-        path: '/admin/login',
+        path: '/login',
         query: {
             redirect: router.currentRoute.fullPath
         }
@@ -23,13 +23,16 @@ const errorHandle = (status, other) => {
     switch (status) {
         // 401: 未登录状态，跳转登录页
         case 401:
-            toLogin();
+            storage.remove("accessToken");
+            setTimeout(() => {
+                toLogin();
+            }, 1000);
             break;
         // 403 token过期
         // 清除token并跳转登录页
         case 403:
             console.log('登录过期，请重新登录');
-            storage.remove("token");
+            storage.remove("accessToken");
             setTimeout(() => {
                 toLogin();
             }, 1000);
@@ -46,7 +49,7 @@ const errorHandle = (status, other) => {
 //请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    var token = storage.get("token");
+    let token = storage.get("accessToken");
     if (token != null) {
         config.headers['Authorization'] = `Bearer ${token}`;
     }

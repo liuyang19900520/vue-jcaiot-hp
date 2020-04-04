@@ -4,17 +4,12 @@ import WebLayout from "../layout/WebLayout";
 import MobileLayout from "../layout/MobileLayout";
 import MobileHomeView from "../views/mobile/web/MobileHomeView";
 
-
-import toPath from "path-to-regexp";
-
-function langReg() {
-// 引入模块
-// 要使用路径中找到的键填充的数组
-    var keys = []
-    var re = toPath('/foo/:bar', keys)
-    console.log(re)
-    return re;
-}
+// function langReg() {
+//     var pathToRegexp = require('path-to-regexp')
+//     var keys = [{name: 'foo', delimiter: '/', optional: false, repeat: true}]
+//     var re = pathToRegexp('/:foo+', keys)
+//     return re
+// }
 
 const webRouter =
     {
@@ -30,7 +25,7 @@ const webRouter =
                     'mobile-web': MobileHomeView,
                 },
             }, {
-                path: langReg(),
+                path: '/params-with-regex/:lang(jp|en)',
                 components: {
                     'pc-web': HomeView,
                     'mobile-web': MobileHomeView,

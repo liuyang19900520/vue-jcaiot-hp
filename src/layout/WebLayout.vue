@@ -22,7 +22,6 @@
         </v-app-bar>
         <v-content>
             <v-container class="fill-height" fluid>
-                <input type="text" v-model="$store.state.message.lang"/>
                 <router-view name="pc-web"></router-view>
             </v-container>
         </v-content>

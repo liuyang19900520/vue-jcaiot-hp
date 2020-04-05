@@ -5,8 +5,6 @@
                 app
         >
             <v-list dense>
-
-
                 <v-list-item v-for="(menu,index) in menus" :key="index" link @click="link2pageAdmin(menu.link)">
                     <v-list-item-content>
                         <v-list-item-title>{{menu.title}}++++{{index}}</v-list-item-title>

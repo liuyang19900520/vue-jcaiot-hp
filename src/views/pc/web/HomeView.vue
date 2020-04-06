@@ -33,17 +33,27 @@
 
         <div class="block">
             <h3>加入我们</h3>
+            <div class="join-us-div">
+                <v-img class="join-us-item" src="https://picsum.photos/510/300?random" aspect-ratio="1.7"></v-img>
+                <div class="join-us-item">
+                    <JoinUsForm></JoinUsForm>
+                </div>
+
+            </div>
 
         </div>
-
+        <h4> 地址：〒163-0222 東京都新宿区西新宿2-6-1新宿住友ビル22F</h4>
+        <h4> 加入会员：微信 jinliu0130</h4>
+        <h4>会刊公众号： 日本AI•IoT最前线(每周更新)</h4>
     </div>
 </template>
 
 <script>
     import HomePostCard from "../../../components/pc/web/HomePostCard";
+    import JoinUsForm from "../../../components/pc/web/JoinUsForm";
 
     export default {
-        components: {HomePostCard},
+        components: {JoinUsForm, HomePostCard},
         props: {
             source: String
         },
@@ -87,6 +97,15 @@
         flex-direction: row;
     }
 
+    .join-us-div {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .join-us-item {
+        flex-grow: 1; /* default 0 */
+        margin: 2%;
+    }
 
     .post-more-button {
         width: 15%;

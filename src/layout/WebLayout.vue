@@ -27,7 +27,9 @@
         </v-content>
         <v-footer padless>
             <v-card class="flex primary" flat>
+
                 <v-card-title class=" white--text">
+
                     <span class="subheading "> {{$t("footerText")}}</span>
                     <v-spacer></v-spacer>
                     <v-btn
@@ -41,6 +43,7 @@
                     </v-btn>
                 </v-card-title>
                 <v-card-text class="py-2 white--text text-center">
+                    <h4>会刊公众号： 日本AI•IoT最前线(每周更新)</h4>
                     {{ new Date().getFullYear() }} — <strong>jcaiot.com (created by liuyang19900520)</strong>
                 </v-card-text>
             </v-card>

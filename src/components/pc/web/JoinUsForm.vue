@@ -32,6 +32,16 @@
                     color="white"
                     label="E-mail"
             ></v-text-field>
+            <v-text-field
+                    :disabled="!isEditing"
+                    color="white"
+                    label="Job"
+            ></v-text-field>
+            <v-text-field
+                    :disabled="!isEditing"
+                    color="white"
+                    label="Address"
+            ></v-text-field>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>

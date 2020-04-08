@@ -6,13 +6,14 @@ import router from './router/';
 import store from './store';
 import api from './api'
 
+
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 Vue.config.productionTip = false;
 
 new Vue({
-  vuetify,
-  i18n,
-  router,
-  store,
-  render: h => h(App)
+    vuetify,
+    i18n,
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app');

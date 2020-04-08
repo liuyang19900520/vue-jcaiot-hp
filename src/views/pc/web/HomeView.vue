@@ -3,6 +3,8 @@
         <div class="block">
             <h2 class="center">{{banner}}</h2>
             <br/>
+            <Carousels></Carousels>
+            <br/>
             <h4>Google フォトなら、高画質の写真を無料で、無制限に保存できます。
                 一般社团法人日中AI•IoT产业联盟（简称JCAIoT），受日本政府认可，携手中国和日本的Al·loT各领域的伙伴，
                 着眼于中日优势互补，促进中日技术与产业化交流与合作，力争在中日之间打造一个更广泛的，
@@ -24,15 +26,17 @@
                 <HomePostCard></HomePostCard>
                 <HomePostCard></HomePostCard>
                 <HomePostCard></HomePostCard>
+                <HomePostCard></HomePostCard>
             </div>
             <br/>
             <div class="center">
-                <v-btn class="ma-lg-12 post-more-button" outlined color="teal">更多信息</v-btn>
+                <v-btn class="ma-lg-12 post-more-button" outlined color="teal" @click="link2Page('/posts')">更多信息
+                </v-btn>
             </div>
         </div>
-
         <div class="block">
             <h3>加入我们</h3>
+            <br/>
             <div class="join-us-div">
                 <v-img class="join-us-item" src="https://picsum.photos/510/300?random" aspect-ratio="1.7"></v-img>
                 <div class="join-us-item">
@@ -40,20 +44,19 @@
                 </div>
 
             </div>
-
         </div>
-        <h4> 地址：〒163-0222 東京都新宿区西新宿2-6-1新宿住友ビル22F</h4>
-        <h4> 加入会员：微信 jinliu0130</h4>
-        <h4>会刊公众号： 日本AI•IoT最前线(每周更新)</h4>
+
     </div>
 </template>
 
 <script>
+    import Carousels from "../../../components/pc/web/Carousels";
     import HomePostCard from "../../../components/pc/web/HomePostCard";
     import JoinUsForm from "../../../components/pc/web/JoinUsForm";
+    import routerUtils from '../../../utils/routerUtils';
 
     export default {
-        components: {JoinUsForm, HomePostCard},
+        components: {Carousels, JoinUsForm, HomePostCard},
         props: {
             source: String
         },
@@ -70,7 +73,8 @@
                     console.log(res);
                     this.banner = res.data.banner;
                 });
-            }
+            },
+            link2Page:routerUtils.link2page,
         },
         watch: {
             "$route.path": "getBanner"
@@ -82,8 +86,6 @@
     .block {
         margin-left: 2%;
         margin-right: 2%;
-        margin-top: 1%;
-        margin-bottom: 1%;
         padding: 1%;
     }
 
@@ -104,7 +106,8 @@
 
     .join-us-item {
         flex-grow: 1; /* default 0 */
-        margin: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
     }
 
     .post-more-button {

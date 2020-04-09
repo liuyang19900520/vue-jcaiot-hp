@@ -4,6 +4,7 @@ import WebLayout from "../layout/WebLayout";
 import MobileLayout from "../layout/MobileLayout";
 import MobileHomeView from "../views/mobile/web/MobileHomeView";
 import PostListView from "../views/pc/web/PostListView";
+import PostView from "../views/pc/web/PostView";
 
 // function langReg() {
 //     var pathToRegexp = require('path-to-regexp')
@@ -35,6 +36,11 @@ const webRouter =
                 path: '/posts',
                 components: {
                     'pc-web': PostListView,
+                },
+            }, {
+                path: '/posts/:postId',
+                components: {
+                    'pc-web': PostView,
                 },
             }, {
                 path: '/members',

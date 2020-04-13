@@ -57,9 +57,6 @@
 
     export default {
         components: {Carousels, JoinUsForm, HomePostCard},
-        props: {
-            source: String
-        },
         data: () => ({
             banner: null
         }),

@@ -10,12 +10,11 @@ import 'mavon-editor/dist/css/index.css'
 
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 Vue.config.productionTip = false;
-
+Vue.use(mavonEditor);
 new Vue({
     vuetify,
     i18n,
     router,
     store,
-    mavonEditor,
     render: h => h(App)
 }).$mount('#app');

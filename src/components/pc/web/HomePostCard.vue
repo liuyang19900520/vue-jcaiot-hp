@@ -26,13 +26,6 @@
             >
                 Share
             </v-btn>
-
-            <v-btn
-                    color="orange"
-                    text
-            >
-                Explore
-            </v-btn>
         </v-card-actions>
     </v-card>
 </template>

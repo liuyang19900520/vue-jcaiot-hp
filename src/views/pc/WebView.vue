@@ -21,7 +21,7 @@
             <v-btn color="primary" depressed @click="link2pageLogin()">{{$t("signIn")}}</v-btn>
         </v-app-bar>
         <v-content>
-            <v-container class="fill-height" fluid>
+            <v-container>
                 <input type="text" v-model="$store.state.message.lang"/>
                 <router-view name="web"></router-view>
             </v-container>

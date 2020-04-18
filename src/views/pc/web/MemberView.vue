@@ -1,45 +1,43 @@
 <template>
     <div>
-        <v-tabs
-                v-model="tab"
-                background-color="transparent"
-                color="teal"
-                grow
-        >
-            <v-tab> 专家
-            </v-tab>
-            <v-tab> 协会
-            </v-tab>
-            <v-tab> 企业
-            </v-tab>
-        </v-tabs>
+        <v-toolbar flat>
+            <template>
+                <v-tabs v-model="tabs" centered>
+                    <v-tab>协会</v-tab>
+                    <v-tab>企业</v-tab>
+                    <v-tab>专家</v-tab>
+                </v-tabs>
+            </template>
+        </v-toolbar>
 
-        <v-tabs-items v-model="tab">
+        <v-tabs-items v-model="tabs">
             <v-tab-item>
-                <MemberExpertView></MemberExpertView>
+                <MemberAssociationView></MemberAssociationView>
             </v-tab-item>
             <v-tab-item>
-                <MemberExpertView></MemberExpertView>
+                <v-card flat>
+                    <MemberEnterpriseView></MemberEnterpriseView>
+                </v-card>
             </v-tab-item>
             <v-tab-item>
-                <MemberExpertView></MemberExpertView>
+                <v-card flat>
+                    <MemberExpertView></MemberExpertView>
+                </v-card>
             </v-tab-item>
-
         </v-tabs-items>
     </div>
 </template>
 <script>
     import MemberExpertView from "./MemberExpertView";
+    import MemberEnterpriseView from "./MemberEnterpriseView";
+    import MemberAssociationView from "./MemberAssociationView";
 
     export default {
         name: "MemberView",
-        components: {MemberExpertView},
+        components: {MemberExpertView, MemberEnterpriseView, MemberAssociationView},
         data() {
             return {
-                tab: null,
-                items: [
-                    'Appetizers', 'Entrees', 'Deserts',
-                ],
+                tabs: null,
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             }
         },
@@ -47,8 +45,5 @@
 </script>
 
 <style scoped>
-    /* Helper classes */
-    .member-view {
-        width: 100%
-    }
+
 </style>

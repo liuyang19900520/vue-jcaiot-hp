@@ -1,6 +1,6 @@
 <template>
     <v-card
-            class="mx-auto"
+            class="mx-auto expert-card-view-margin"
             max-width="344"
     >
         <v-img
@@ -60,5 +60,9 @@
 </script>
 
 <style scoped>
+
+    .expert-card-view-margin {
+        margin-bottom: 2%;
+    }
 
 </style>

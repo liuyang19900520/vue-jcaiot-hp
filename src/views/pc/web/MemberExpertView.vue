@@ -1,5 +1,22 @@
 <template>
-    <ExpertCard v-for="index in 10" :key="index"></ExpertCard>
+    <div class="expert-card">
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+        <ExpertCard></ExpertCard>
+    </div>
 </template>
 <script>
     import ExpertCard from "../../../components/pc/web/ExpertCard";
@@ -14,5 +31,10 @@
 </script>
 
 <style scoped>
-
+    .expert-card {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
 </style>

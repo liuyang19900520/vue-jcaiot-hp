@@ -3,7 +3,7 @@
         <div class="block">
             <h2 class="center">{{banner}}</h2>
             <br/>
-            <Carousels></Carousels>
+            <Carousels class="carousels"></Carousels>
             <br/>
             <h4>Google フォトなら、高画質の写真を無料で、無制限に保存できます。
                 一般社团法人日中AI•IoT产业联盟（简称JCAIoT），受日本政府认可，携手中国和日本的Al·loT各领域的伙伴，
@@ -71,7 +71,7 @@
                     this.banner = res.data.banner;
                 });
             },
-            link2Page:routerUtils.link2page,
+            link2Page: routerUtils.link2page,
         },
         watch: {
             "$route.path": "getBanner"
@@ -109,6 +109,12 @@
 
     .post-more-button {
         width: 15%;
+    }
+
+    .carousels {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
 </style>

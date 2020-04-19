@@ -1,12 +1,11 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, UnauthorizedException, Inject } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Inject, UnauthorizedException } from '@nestjs/common';
 import { SystemException } from '../exceptions/system.exception';
-import { ApiErrorCode } from '../exceptions/api-error-code';
 import { Logger } from 'winston';
-import { RedisService } from '../../cache/redis.service'
-import { JwtService } from '@nestjs/jwt';
+
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
-  constructor(@Inject('winston') private readonly logger: Logger) { }
+  constructor(@Inject('winston') private readonly logger: Logger) {
+  }
 
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -29,8 +28,8 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           message: exception.getErrorMessage(),
           data: {
             date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
-            path: request.url
-          }
+            path: request.url,
+          },
         });
     } else if (exception instanceof UnauthorizedException) {
 
@@ -48,27 +47,25 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
       response
         .status(status)
         .json({
-          code: "1",
+          code: '1',
           message: exception.message,
           data: {
             date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
-            path: request.url
-          }
+            path: request.url,
+          },
         });
 
 
-
-    }
-    else {
+    } else {
       response
         .status(status)
         .json({
-          code: "1",
+          code: '1',
           message: exception.message,
           data: {
             date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
-            path: request.url
-          }
+            path: request.url,
+          },
         });
     }
   }

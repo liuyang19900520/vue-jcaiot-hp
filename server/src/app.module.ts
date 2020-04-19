@@ -1,20 +1,17 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { MenuModule } from './menu/menu.module';
-
+import { ConfigModule, ConfigService } from 'nestjs-config';
+import * as path from 'path';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    // RedisModule.register({
-    //   host: '192.168.0.16',
-    //   port: 6379
-    // }),
-    MongooseModule.forRoot('mongodb+srv://liuyang19900520:1990052099@jcaiot-3aplq.mongodb.net/jcaiot?retryWrites=true&w=majority'),
+    ConfigModule.load(path.resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
     WinstonModule.forRoot({
       transports: [
         new winston.transports.Console({
@@ -43,6 +40,11 @@ import { MenuModule } from './menu/menu.module';
         // other transports...
       ],
       // options
+    }), MongooseModule.forRootAsync({
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get('database.uri'),
+      }),
+      inject: [ConfigService],
     }),
     BannerModule, AuthModule, MenuModule,
   ],
@@ -52,5 +54,5 @@ export class AppModule {
     consumer
       .apply(LoggerMiddleware)
       .forRoutes('*');
-  }
+  };
 }

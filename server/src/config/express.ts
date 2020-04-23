@@ -1,9 +1,5 @@
-export default {
-  environment: process.env.NODE_ENV,
-  port: process.env.EXPRESS_PORT,
+import { registerAs } from '@nestjs/config';
 
-  // helpers
-  isProduction() {
-    return this.get('express.environment') === 'production';
-  },
-};
+export default registerAs('express', () => ({
+  port: process.env.EXPRESS_PORT,
+}));

@@ -20,6 +20,4 @@ export class MenuController {
     const admin = req.user.admin;
     return this.menuService.listMenu(admin);
   }
-
-
 }

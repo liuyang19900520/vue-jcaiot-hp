@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   async create(AddUserDTO: AddUserDTO): Promise<any> {
-    let returnDb = await this.findOne(AddUserDTO.username);
+    const returnDb = await this.findOne(AddUserDTO.username);
     console.log(returnDb);
     if (returnDb) {
       throw new SystemException(ApiErrorCode.REGISTER_FAILD, 'REGISTER_FAILD', HttpStatus.OK);
@@ -30,7 +30,7 @@ export class UsersService {
     AddUserDTO.password = newPassword;
     AddUserDTO.salt = salt;
     const addUser = new this.userModel(AddUserDTO);
-    let returnUser: User = await addUser.save();
+    const returnUser: User = await addUser.save();
 
     return { usrename: returnUser.username, admin: returnUser.admin };
   }

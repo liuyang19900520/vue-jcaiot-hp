@@ -10,7 +10,6 @@ import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,20 +24,21 @@ import jwtConfig from './config/jwt.config';
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike(),
           ),
-        }), new winston.transports.File({
-          filename: './logs/warn.log', level: 'warn', format: winston.format.combine(
+        }),
+        new winston.transports.File({
+          filename: process.env.INFO_LOG_PATH, level: 'info', format: winston.format.combine(
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike(),
           ),
         }),
         new winston.transports.File({
-          filename: './logs/error.log', level: 'error', format: winston.format.combine(
+          filename: process.env.WARN_LOG_PATH, level: 'warn', format: winston.format.combine(
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike(),
           ),
         }),
         new winston.transports.File({
-          filename: './logs/info.log', level: 'info', format: winston.format.combine(
+          filename: process.env.ERROR_LOG_PATH, level: 'error', format: winston.format.combine(
             winston.format.timestamp(),
             nestWinstonModuleUtilities.format.nestLike(),
           ),
@@ -52,7 +52,6 @@ import jwtConfig from './config/jwt.config';
   ],
 })
 export class AppModule {
-
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)

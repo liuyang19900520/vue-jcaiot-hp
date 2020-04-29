@@ -21,6 +21,6 @@ const adminRouter = {
             }
         },
     ]
-}
+};
 
-export default adminRouter
+export default adminRouter;

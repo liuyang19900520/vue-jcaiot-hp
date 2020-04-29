@@ -18,7 +18,7 @@ const toLogin = () => {
             redirect: router.currentRoute.fullPath
         }
     });
-}
+};
 const errorHandle = (status, other) => {
     switch (status) {
         // 401: 未登录状态，跳转登录页
@@ -44,27 +44,29 @@ const errorHandle = (status, other) => {
         default:
             console.log(other);
     }
-}
+};
 
 //请求拦截器
-instance.interceptors.request.use(function (config) {
-    // 在发送请求之前做些什么
-    let token = storage.get("accessToken");
-    if (token != null) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-}, function (error) {
-    // 对请求错误做些什么
-    return Promise.reject(error);
-});
+instance.interceptors.request.use(
+    function (config) {
+        // 在发送请求之前做些什么
+        let token = storage.get("accessToken");
+        console.log('accessToken in the interceptors=====' + token);
+        if (token != null) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    }, function (error) {
+        // 对请求错误做些什么
+        return Promise.reject(error);
+    });
 
 
 // 响应拦截器
 instance.interceptors.response.use(
     // 请求成功
     res => {
-        res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.dta)
+        res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.data);
         return res.data;
     },
     // 请求失败

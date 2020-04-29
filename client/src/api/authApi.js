@@ -14,10 +14,5 @@ const auth = {
             }
         });
     },
-    listMenus() {
-        return axios.get("/menus")
-    }
-
-
 };
 export default auth;

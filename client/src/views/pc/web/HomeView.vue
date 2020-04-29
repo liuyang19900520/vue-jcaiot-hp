@@ -60,9 +60,6 @@
         data: () => ({
             banner: null
         }),
-        created() {
-            this.getBanner();
-        },
         methods: {
             getBanner: function () {
                 let lang = this.$store.state.message.lang;
@@ -75,7 +72,10 @@
         },
         watch: {
             "$route.path": "getBanner"
-        }
+        },
+        created() {
+            this.getBanner();
+        },
     };
 </script>
 

@@ -1,22 +1,11 @@
 <template>
     <div>
         <div class="block">
-            <h2 class="center">{{banner}}</h2>
+            <h2 class="center">{{banner.banner}}</h2>
             <br/>
             <Carousels class="carousels"></Carousels>
             <br/>
-            <h4>Google フォトなら、高画質の写真を無料で、無制限に保存できます。
-                一般社团法人日中AI•IoT产业联盟（简称JCAIoT），受日本政府认可，携手中国和日本的Al·loT各领域的伙伴，
-                着眼于中日优势互补，促进中日技术与产业化交流与合作，力争在中日之间打造一个更广泛的，
-                国际性的物联网与人工智能的技术与市场交流的平台，让更多的企业和个人了解Al·loT并参与该领域的创新与合作，
-                最终能够在Al·loT领域形成中日互相促进、共同发展的崭新局面。本联盟于2016年1月在日本东京成立，经过2年多的努力，
-                会员达300余位，其中，企业为100多家，涵盖了机器人，大数据，区块链，智慧工业，通信，金融，交通，农业，物流，医疗养老大健康，
-                安全等等众多细分领域；其他成员为各个领域的技术精英或专家学者。两年来，我们举办了多次专业性和针对性较强的交流活动，
-                新技术新商业模式让大家耳目一新，并且实现了数个领域的项目对接，得到了在日华人，日本学术界和企业界的积极认可，
-                与数家日本本土物联网和人工智能的协会取得了良好的互动和信赖关系。作为中日间纽带，
-                2017年与中国最大的中关村物联网产业联盟在北京和东京进行多次面对面的交流，成为其在日本的唯一的全面战略合作伙伴
-                。技术人才汇聚，专业公司云集是本连盟的最主要特点。2018年，我们的目标是计划再吸收100家日本企业并做好相应服务。
-                我们要继续以促进中日间Al·loT领域的技术协作创新、产业合作发展，联盟做实做強为基本目标，顺应时代技术潮流变化，让日中Al·loT产业联盟更上一个台阶。
+            <h4>{{banner.content}}
             </h4>
         </div>
         <div class="block">
@@ -42,7 +31,6 @@
                 <div class="join-us-item">
                     <JoinUsForm></JoinUsForm>
                 </div>
-
             </div>
         </div>
 
@@ -58,14 +46,14 @@
     export default {
         components: {Carousels, JoinUsForm, HomePostCard},
         data: () => ({
-            banner: null
+            banner: null,
         }),
         methods: {
             getBanner: function () {
                 let lang = this.$store.state.message.lang;
                 this.$api.banner.selectBanner(lang).then(res => {
                     console.log(res);
-                    this.banner = res.data.banner;
+                    this.banner = res.data;
                 });
             },
             link2Page: routerUtils.link2page,

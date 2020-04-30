@@ -1,13 +1,11 @@
 <template>
     <div>
         <form>
-            <span>{{tabLang}}</span>
             <v-textarea
                     clearable
                     clear-icon="cancel"
-                    label="Text"
-                    value="this.banner"
-            ></v-textarea>
+                    :label="tabLang"
+                    v-model="banner"></v-textarea>
             <div>
                 <v-spacer></v-spacer>
                 <v-btn color="success"
@@ -28,8 +26,8 @@
             }
         },
         data: () => ({
-            tabLang: null,
             banner: null,
+            showTitle: null,
         }),
         methods: {
             getBanner: function () {
@@ -38,15 +36,14 @@
                     this.banner = res.data.banner;
                 });
             },
+            submit: function () {
+
+            }
         },
         created() {
             this.getBanner();
-        },
-        watch: {
-            'tabLang': function (val) { //监听props中的属性
-                this.tabLang = val;
-            }
-        },
+
+        }
     }
 </script>
 

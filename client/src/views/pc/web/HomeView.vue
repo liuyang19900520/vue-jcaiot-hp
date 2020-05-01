@@ -12,10 +12,10 @@
             <h3>最新信息</h3>
             <br/>
             <div class="post-card-list">
-                <HomePostCard></HomePostCard>
-                <HomePostCard></HomePostCard>
-                <HomePostCard></HomePostCard>
-                <HomePostCard></HomePostCard>
+                <HomePostCard class="post-card-margin"></HomePostCard>
+                <HomePostCard class="post-card-margin"></HomePostCard>
+                <HomePostCard class="post-card-margin"></HomePostCard>
+                <HomePostCard class="post-card-margin"></HomePostCard>
             </div>
             <br/>
             <div class="center">
@@ -81,7 +81,17 @@
 
     .post-card-list {
         display: flex;
-        flex-direction: row;
+        flex-basis: 40%;
+        white-space: nowrap;
+        justify-content: center;
+        overflow-x: auto;
+        flex-shrink: 0;
+    }
+
+    .post-card-margin {
+        flex: 1;
+        width: 30%;
+
     }
 
     .join-us-div {
@@ -104,5 +114,6 @@
         margin-left: 10%;
         margin-right: 10%;
     }
+
 
 </style>

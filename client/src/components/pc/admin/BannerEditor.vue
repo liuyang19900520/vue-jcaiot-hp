@@ -4,8 +4,8 @@
             <v-textarea
                     clearable
                     clear-icon="cancel"
-                    :label="tabLang"
-                    v-model="banner"></v-textarea>
+                    :label="banner.banner"
+                    v-model="banner.content"></v-textarea>
             <div>
                 <v-spacer></v-spacer>
                 <v-btn color="success"
@@ -27,13 +27,12 @@
         },
         data: () => ({
             banner: null,
-            showTitle: null,
         }),
         methods: {
             getBanner: function () {
                 this.$api.banner.selectBanner(this.tabLang).then(res => {
                     console.log(res);
-                    this.banner = res.data.banner;
+                    this.banner = res.data;
                 });
             },
             submit: function () {

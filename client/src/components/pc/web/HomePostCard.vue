@@ -6,17 +6,15 @@
         <v-img
                 class="white--text align-end"
                 height="200px"
-                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                :src="postImg"
         >
-            <v-card-title>Top 10 Australian beaches</v-card-title>
+            <v-card-title>{{postTitle}}</v-card-title>
         </v-img>
 
-        <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+        <v-card-subtitle class="pb-0">{{postTime}}</v-card-subtitle>
 
         <v-card-text class="text--primary">
-            <div>Whitehaven Beach</div>
-
-            <div>Whitsunday Island, Whitsunday Islands</div>
+            <div>{{postSummary}}</div>
         </v-card-text>
 
         <v-card-actions>
@@ -24,7 +22,7 @@
                     color="orange"
                     text
             >
-                Share
+                Read More
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -32,7 +30,14 @@
 
 <script>
     export default {
-        name: "HomePostCard"
+        name: "HomePostCard",
+        data: () => ({}),
+        props: {
+            postTitle: null,
+            postImg: null,
+            postTime: null,
+            postSummary: null,
+        }
     }
 </script>
 

@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -48,7 +49,7 @@ import jwtConfig from './config/jwt.config';
       // options
     }),
     MongooseModule.forRoot(process.env.DB_URI),
-    BannerModule, AuthModule, MenuModule,
+    BannerModule, AuthModule, MenuModule, PostModule,
   ],
 })
 export class AppModule {

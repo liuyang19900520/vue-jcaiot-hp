@@ -35,7 +35,6 @@
     export default {
         name: "BannerView",
         components: {BannerEditor},
-
         data() {
             return {
                 tabs: null,

@@ -1,21 +1,22 @@
 <template>
     <div>
         <div class="block">
-            <h2 class="center">{{banner.banner}}</h2>
+            <h2 class="center">{{bannerTitle}}</h2>
             <br/>
             <Carousels class="carousels"></Carousels>
             <br/>
-            <h4>{{banner.content}}
+            <h4>{{bannerContent}}
             </h4>
         </div>
         <div class="block">
             <h3>最新信息</h3>
             <br/>
             <div class="post-card-list">
-                <HomePostCard class="post-card-margin"></HomePostCard>
-                <HomePostCard class="post-card-margin"></HomePostCard>
-                <HomePostCard class="post-card-margin"></HomePostCard>
-                <HomePostCard class="post-card-margin"></HomePostCard>
+                <HomePostCard v-for="(post, i) in posts" class="post-card-margin" :key="i"
+                              :post-img="post.mainpic"
+                              :post-summary="post.summary"
+                              :post-time="post.updatetime"
+                              :post-title="post.title"></HomePostCard>
             </div>
             <br/>
             <div class="center">
@@ -46,15 +47,23 @@
     export default {
         components: {Carousels, JoinUsForm, HomePostCard},
         data: () => ({
-            banner: null,
+            bannerTitle: null,
+            bannerContent: null,
+            posts: null,
         }),
         methods: {
             getBanner: function () {
                 let lang = this.$store.state.message.lang;
                 this.$api.banner.selectBanner(lang).then(res => {
-                    console.log(res);
-                    this.banner = res.data;
+                    this.bannerTitle = res.data.banner;
+                    this.bannerContent = res.data.content;
                 });
+            },
+            getPostMain: function () {
+                this.$api.post.selectPosts().then(res => {
+                    console.log(res);
+                    this.posts = res.data;
+                })
             },
             link2Page: routerUtils.link2page,
         },
@@ -63,6 +72,7 @@
         },
         created() {
             this.getBanner();
+            this.getPostMain();
         },
     };
 </script>
@@ -114,6 +124,5 @@
         margin-left: 10%;
         margin-right: 10%;
     }
-
 
 </style>

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostDocument } from './interfaces/post.interface';
@@ -13,8 +13,9 @@ export class PostController {
     await this.postService.create(createPostDto);
   }
 
-  @Get()
-  async listMenu(@Request() req): Promise<PostDocument[]> {
-    return this.postService.findAll();
+  @Get(':num')
+  async listMenu(@Param('num') num): Promise<PostDocument[]> {
+    const n = parseInt(num, 10);
+    return this.postService.findMain(n);
   }
 }

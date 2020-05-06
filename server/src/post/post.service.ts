@@ -14,8 +14,8 @@ export class PostService {
     return createPost.save();
   }
 
-  async findAll(): Promise<PostDocument[]> {
-    return this.postModel.find().exec();
+  async findMain(num:number): Promise<PostDocument[]> {
+    return this.postModel.find().limit(num);
   }
 
 }

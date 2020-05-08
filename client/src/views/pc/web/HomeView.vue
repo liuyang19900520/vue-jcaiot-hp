@@ -13,9 +13,9 @@
             <br/>
             <div class="post-card-list">
                 <HomePostCard v-for="(post, i) in posts" class="post-card-margin" :key="i"
-                              :post-img="post.mainpic"
+                              :post-img="post.mainPic"
                               :post-summary="post.summary"
-                              :post-time="post.updatetime"
+                              :post-time="post.updateTime"
                               :post-title="post.title"></HomePostCard>
             </div>
             <br/>
@@ -59,8 +59,8 @@
                     this.bannerContent = res.data.content;
                 });
             },
-            getPostMain: function () {
-                this.$api.post.selectPosts().then(res => {
+            getPostMain: function (num) {
+                this.$api.post.selectPosts(num).then(res => {
                     console.log(res);
                     this.posts = res.data;
                 })
@@ -72,7 +72,10 @@
         },
         created() {
             this.getBanner();
-            this.getPostMain();
+            let widthWindow = window.innerWidth;
+            console.log('widthWindow====', widthWindow);
+            let num = widthWindow / 400;
+            this.getPostMain(num);
         },
     };
 </script>
@@ -91,17 +94,28 @@
 
     .post-card-list {
         display: flex;
-        flex-basis: 40%;
+        flex-direction: row;
         white-space: nowrap;
-        justify-content: center;
         overflow-x: auto;
-        flex-shrink: 0;
     }
 
     .post-card-margin {
         flex: 1;
-        width: 30%;
+        font-size: 16px;
+        justify-content: center;
+        align-items: center;
+        /* width: 88px; */
+        flex-basis: 30%;
+        flex-shrink: 0;
+    }
 
+    ::-webkit-scrollbar {
+        width: 0 !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0;
     }
 
     .join-us-div {

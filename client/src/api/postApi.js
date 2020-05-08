@@ -1,8 +1,8 @@
 import axios from '../utils/axiosUtils';
 
 const post = {
-    selectPosts() {
-        return axios.get("/posts/");
+    selectPosts(num) {
+        return axios.get("/posts/" + num);
     }
 
 };

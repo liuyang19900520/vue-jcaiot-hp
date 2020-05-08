@@ -1,6 +1,6 @@
 <template>
     <v-card
-            class="mx-auto"
+            class="mx-auto margin-card"
             max-width="400"
     >
         <v-img
@@ -34,7 +34,9 @@
         data: () => ({}),
         props: {
             postTitle: null,
-            postImg: null,
+            postImg: {
+                default: require('@/assets/default-pic.png')
+            },
             postTime: null,
             postSummary: null,
         }
@@ -42,5 +44,8 @@
 </script>
 
 <style scoped>
+    .margin-card {
+        margin: 2%;
+    }
 
 </style>

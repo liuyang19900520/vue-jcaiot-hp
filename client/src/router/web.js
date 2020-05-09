@@ -6,13 +6,6 @@ import MobileHomeView from "../views/mobile/web/MobileHomeView";
 import PostListView from "../views/pc/web/PostListView";
 import PostView from "../views/pc/web/PostView";
 
-// function langReg() {
-//     var pathToRegexp = require('path-to-regexp')
-//     var keys = [{name: 'foo', delimiter: '/', optional: false, repeat: true}]
-//     var re = pathToRegexp('/:foo+', keys)
-//     return re
-// }
-
 const webRouter =
     {
         path: '/',
@@ -38,7 +31,17 @@ const webRouter =
                     'pc-web': PostListView,
                 },
             }, {
+                path: '/:lang(jp|en)/posts',
+                components: {
+                    'pc-web': PostListView,
+                },
+            }, {
                 path: '/posts/:postId',
+                components: {
+                    'pc-web': PostView,
+                },
+            }, {
+                path: '/:lang(jp|en)/posts/:postId',
                 components: {
                     'pc-web': PostView,
                 },
@@ -47,7 +50,12 @@ const webRouter =
                 components: {
                     'pc-web': MemberView,
                 },
-            }
+            }, {
+                path: '/:lang(jp|en)/members',
+                components: {
+                    'pc-web': MemberView,
+                },
+            },
         ]
-    }
-export default webRouter
+    };
+export default webRouter;

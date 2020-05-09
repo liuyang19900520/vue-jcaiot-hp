@@ -27,9 +27,7 @@
         </v-content>
         <v-footer padless>
             <v-card class="flex primary" flat>
-
                 <v-card-title class=" white--text">
-
                     <span class="subheading "> {{$t("footerText")}}</span>
                     <v-spacer></v-spacer>
                     <v-btn

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import adminRouter from "./admin";
-import LoginView from "../views/pc/LoginView";
 import webRouter from "./web";
+import LoginView from "../views/pc/LoginView";
 
 
 /**

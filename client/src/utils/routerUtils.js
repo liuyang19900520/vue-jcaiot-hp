@@ -1,7 +1,7 @@
 const routerUtils = {
     link2page(url) {
         let toLang = this.$store.state.message.lang;
-        if (toLang == "zh") {
+        if (toLang === "zh") {
             url = "/" + url;
         } else {
             url = "/" + toLang + url;
@@ -9,7 +9,7 @@ const routerUtils = {
         if (url.startsWith("//")) {
             url = url.substr(1);
         }
-        if (url != "/" && url.endsWith("/")) {
+        if (url !== "/" && url.endsWith("/")) {
             url = url.slice(0, -1);
         }
         this.$router.push(url);
@@ -28,13 +28,10 @@ const routerUtils = {
         if (toPath.endsWith("/")) {
             toPath = toPath.slice(0, -1);
         }
-
-        if (toLang === 'zh') {
-            toPath = "/";
-        } else {
+        if (toLang !== 'zh') {
             toPath = "/" + toLang + toPath;
         }
         return toPath;
     }
-}
+};
 export default routerUtils;

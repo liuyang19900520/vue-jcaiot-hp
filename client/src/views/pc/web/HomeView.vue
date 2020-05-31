@@ -60,7 +60,7 @@
                 });
             },
             getPostMain: function (num) {
-                this.$api.post.selectPosts(num).then(res => {
+                this.$api.post.selectMainPosts(num).then(res => {
                     console.log(res);
                     this.posts = res.data;
                 })
@@ -73,8 +73,7 @@
         created() {
             this.getBanner();
             let widthWindow = window.innerWidth;
-            console.log('widthWindow====', widthWindow);
-            let num = widthWindow / 400;
+            let num = Math.floor(widthWindow / 400);
             this.getPostMain(num);
         },
     };

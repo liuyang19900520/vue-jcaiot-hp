@@ -13,9 +13,18 @@ export class PostController {
     await this.postService.create(createPostDto);
   }
 
-  @Get(':num')
-  async listMenu(@Param('num') num): Promise<PostDocument[]> {
-    const n = parseInt(num, 10);
-    return this.postService.findMain(n);
+  @Post('/main')
+  async listMenu(@Body('num') num: number): Promise<PostDocument[]> {
+    console.log(num);
+    return this.postService.findMain(num);
   }
+
+  @Post('/page')
+  async listPostByPage(@Body('pageNo') pageNo: number): Promise<any> {
+    console.log('test for ====', pageNo);
+    return this.postService.findPostList(pageNo);
+  }
+
+
+
 }

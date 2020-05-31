@@ -2,7 +2,7 @@
     <div>
         <v-row dense class="center80">
             <v-col
-                    v-for="(item, i) in items"
+                    v-for="(item, i) in posts"
                     :key="i"
                     cols="12"
             >
@@ -13,20 +13,20 @@
                                 size="180"
                                 tile
                         >
-                            <v-img :src="item.src"></v-img>
+                            <v-img :src="item.mainPic"></v-img>
                         </v-avatar>
                         <div>
                             <v-card-title
                                     class="headline"
                                     v-text="item.title"
                             ></v-card-title>
-                            <v-card-subtitle v-text="item.date"></v-card-subtitle>
+                            <v-card-subtitle v-text="item.updateTime"></v-card-subtitle>
                             <v-card-text class="text--primary">
                                 <div>
                                     {{item.summary}}
                                 </div>
                             </v-card-text>
-                            <v-card-actions >
+                            <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
                                         text
@@ -43,7 +43,7 @@
         </v-row>
         <div class="text-center">
             <v-pagination
-                    v-model="page"
+                    v-model="pageNo"
                     :length="4"
                     circle
             ></v-pagination>
@@ -53,24 +53,31 @@
 
 <script>
     import routerUtils from "../../../utils/routerUtils";
+
     export default {
         name: "PostListView",
         data: () => ({
-            page: 1,
-            items: [
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-                    title: '刘劲博士组织2020年IOT协会赏樱会',
-                    date: '2020/04/09',
-                    summary: 'Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。Java可运行于多个平台，如Windows, Mac' +
-                        'OS，及其他多种U NIX版本的系统。本教程通过简单的实例将让大家更好的了解JAVA编程语言。'
-                },
-
-            ],
+            pageNo: 1,
+            pageCount: null,
+            posts: null,
         }),
         methods: {
-            link2Page:routerUtils.link2page,
+            link2Page: routerUtils.link2page,
+            findPostsList: function (pageNo) {
+                this.$api.post.selectPostsByPage(pageNo).then(res => {
+                    console.log(res);
+                    this.posts = res.data;
+                })
+            },
+        }, created() {
+            this.pageNo = 1;
+            this.findPostsList(this.pageNo-1);
         },
+        watch:{
+            pageNo:function () {
+                this.findPostsList(this.pageNo-1);
+            }
+        }
     }
 </script>
 

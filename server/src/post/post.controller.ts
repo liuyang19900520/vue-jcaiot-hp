@@ -22,9 +22,9 @@ export class PostController {
   @Post('/page')
   async listPostByPage(@Body('pageNo') pageNo: number): Promise<any> {
     console.log('test for ====', pageNo);
-    return this.postService.findPostList(pageNo);
+    const result = this.postService.findPostList(pageNo);
+    return result;
   }
-
 
 
 }

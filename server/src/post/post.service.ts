@@ -19,13 +19,13 @@ export class PostService {
   }
 
   async findPostList(pageNo: number): Promise<any> {
-    const contentCount = 2;
+    const contentCount = 3;
     const skipCount = contentCount * pageNo;
 
-    const content = this.postModel.find().skip(skipCount).limit(contentCount);
-    const countAll = this.postModel.count({});
-    console.log('count===', countAll);
-    const result = { content: content, countAll: countAll };
+    const content = await this.postModel.find().skip(skipCount).limit(contentCount);
+    const countAll = Math.ceil(await this.postModel.countDocuments() / contentCount);
+    const result = { 'content': [content], 'countAll': countAll };
+    console.log('result===', result);
     return result;
   }
 

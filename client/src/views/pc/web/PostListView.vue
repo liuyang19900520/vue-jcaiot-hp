@@ -65,7 +65,7 @@
             link2Page: routerUtils.link2page,
             findPostsList: function (pageNo) {
                 this.$api.post.selectPostsByPage(pageNo).then(res => {
-                    console.log(res);
+                    console.log(res.data.content);
                     this.posts = res.data;
                 })
             },

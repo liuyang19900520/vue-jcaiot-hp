@@ -63,19 +63,19 @@
         }),
         methods: {
             link2Page: routerUtils.link2page,
-            findPostsList: function (pageNo) {
-                this.$api.post.selectPostsByPage(pageNo).then(res => {
+            findPostsList: function (pageNo,pageCount) {
+                this.$api.post.selectPostsByPage(pageNo,pageCount).then(res => {
                     console.log(res.data.content);
-                    this.posts = res.data;
+                    this.posts = res.data.content;
                 })
             },
         }, created() {
             this.pageNo = 1;
-            this.findPostsList(this.pageNo-1);
+            this.findPostsList(this.pageNo-1,2);
         },
         watch:{
             pageNo:function () {
-                this.findPostsList(this.pageNo-1);
+                this.findPostsList(this.pageNo-1,2);
             }
         }
     }

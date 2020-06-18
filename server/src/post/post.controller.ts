@@ -3,7 +3,7 @@ import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostDocument } from './interfaces/post.interface';
 
-@Controller('posts')
+@Controller('api/posts')
 export class PostController {
   constructor(private readonly postService: PostService) {
   }
@@ -13,16 +13,16 @@ export class PostController {
     await this.postService.create(createPostDto);
   }
 
-  @Post('/main')
-  async listMenu(@Body('num') num: number): Promise<PostDocument[]> {
+  @Get('/main')
+  async listMenu(@Param('limit') num: number): Promise<PostDocument[]> {
     console.log(num);
     return this.postService.findMain(num);
   }
 
-  @Post('/page')
-  async listPostByPage(@Body('pageNo') pageNo: number): Promise<any> {
+  @Get('/')
+  async listPostByPage(@Param('pageNo') pageNo: number,@Param('pageCount') pageCount: number): Promise<any> {
     console.log('test for ====', pageNo);
-    const result = this.postService.findPostList(pageNo);
+    const result = this.postService.findPostList(pageNo,pageCount);
     return result;
   }
 

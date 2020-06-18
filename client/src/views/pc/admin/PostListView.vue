@@ -107,7 +107,7 @@
 
         methods: {
             initialize() {
-                this.$api.post.selectPostsByPage(0).then(res => {
+                this.$api.post.selectPostsByPage(0,2).then(res => {
                     this.posts = res.data.content;
                 })
             },

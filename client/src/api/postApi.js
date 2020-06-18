@@ -3,23 +3,17 @@ import axios from '../utils/axiosUtils';
 const post = {
     selectMainPosts(num) {
         return axios({
-            method: 'post',
-            url: '/posts/main',
-            data: {
-                num: num,
-            },
+            method: 'get',
+            url: '/api/posts/main'+'?limit='+num,
             headers: {
                 'content-type': 'application/json'
             }
         });
     },
-    selectPostsByPage(page) {
+    selectPostsByPage(pageNo,pageCount) {
         return axios({
-            method: 'post',
-            url: '/posts/page',
-            data: {
-                pageNo: page,
-            },
+            method: 'get',
+            url: '/api/posts'+'?pageNo='+pageNo+'&pageCount='+pageCount,
             headers: {
                 'content-type': 'application/json'
             }

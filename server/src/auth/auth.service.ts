@@ -20,12 +20,6 @@ export class AuthService {
   async login(user: any) {
     const payload = { admin: user.admin, sub: user.username };
     const accessToken = this.jwtService.sign(payload);
-    // const client = await this.redisService.getClient();
-    // this.redisService.resolve<any>("access_token", p1, 60000);
-    // client.hset("access_token", "access_token", access_token);
-    // client.hset("access_token", "admin", user.admin);
-    // client.hset("access_token", "usrename", user.username);
-    // client.expire('access_token', 6000)
     return {
       accessToken: accessToken,
     };

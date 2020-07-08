@@ -107,7 +107,7 @@
 
         methods: {
             initialize() {
-                this.$api.post.selectPostsByPage(0,2).then(res => {
+                this.$api.post.selectPostsByPage(0,3).then(res => {
                     this.posts = res.data.content;
                 })
             },
@@ -119,9 +119,6 @@
                 console.log("========", postId)
                 this.$router.push("/admin/posts/" + postId)
             },
-
-
-
 
             deleteItem(item) {
                 const index = this.posts.indexOf(item)

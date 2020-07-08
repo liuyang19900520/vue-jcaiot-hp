@@ -44,7 +44,7 @@
         <div class="text-center">
             <v-pagination
                     v-model="pageNo"
-                    :length="4"
+                    :length="pageCount"
                     circle
             ></v-pagination>
         </div>
@@ -67,15 +67,16 @@
                 this.$api.post.selectPostsByPage(pageNo,pageCount).then(res => {
                     console.log(res.data.content);
                     this.posts = res.data.content;
+                    this.pageCount=res.data.countAll;
                 })
             },
         }, created() {
             this.pageNo = 1;
-            this.findPostsList(this.pageNo-1,2);
+            this.findPostsList(this.pageNo-1,3);
         },
         watch:{
             pageNo:function () {
-                this.findPostsList(this.pageNo-1,2);
+                this.findPostsList(this.pageNo-1,3);
             }
         }
     }

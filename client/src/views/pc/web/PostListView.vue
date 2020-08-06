@@ -31,7 +31,7 @@
                                 <v-btn
                                         text
                                         color="teal"
-                                        @click="link2Page('/posts/123')"
+                                        @click="link2Page('/posts/'+item._id)"
                                 >
                                     Learn More
                                 </v-btn>
@@ -63,20 +63,20 @@
         }),
         methods: {
             link2Page: routerUtils.link2page,
-            findPostsList: function (pageNo,pageCount) {
-                this.$api.post.selectPostsByPage(pageNo,pageCount).then(res => {
+            findPostsList: function (pageNo, pageCount) {
+                this.$api.post.selectPostsByPage(pageNo, pageCount).then(res => {
                     console.log(res.data.content);
                     this.posts = res.data.content;
-                    this.pageCount=res.data.countAll;
+                    this.pageCount = res.data.countAll;
                 })
             },
         }, created() {
             this.pageNo = 1;
-            this.findPostsList(this.pageNo-1,3);
+            this.findPostsList(this.pageNo - 1, 3);
         },
-        watch:{
-            pageNo:function () {
-                this.findPostsList(this.pageNo-1,3);
+        watch: {
+            pageNo: function () {
+                this.findPostsList(this.pageNo - 1, 3);
             }
         }
     }

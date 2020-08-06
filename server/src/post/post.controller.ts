@@ -20,9 +20,14 @@ export class PostController {
 
   @Get()
   async listPostByPage(@Query('pageNo') pageNo: number,@Query('pageCount') pageCount: number): Promise<any> {
-
     const result = this.postService.findPostList(pageNo,pageCount);
-    console.log('test for ====', result);
+    return result;
+  }
+
+  @Get(':id')
+  async findPostById(@Param('id') id): Promise<any> {
+    console.log('id======',id);
+    const result = this.postService.findPostById(id);
     return result;
   }
 

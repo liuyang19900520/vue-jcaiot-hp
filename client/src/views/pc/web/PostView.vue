@@ -1,9 +1,9 @@
 <template>
 
     <div class="center80">
-        <h1 class="center">刘社长出系我们的2020年的尚颖慧</h1>
+        <h1 class="center">{{title}}</h1>
         <br/>
-        <v-img src="https://picsum.photos/510/300?random" aspect-ratio="3"></v-img>
+        <v-img :src="this.mainPicture" aspect-ratio="3"></v-img>
         <br/>
         <mavon-editor class="mk"
                       :previewBackground="'#FFFFFFFF'"
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-
     export default {
-
         props: {
             source: String
         },
         data: () => ({
+            title:null,
+            mainPicture:'',
             mkValue: "# vue-jcaiot-hp\n" +
                 "\n" +
                 "## Project setup\n" +
@@ -50,16 +50,30 @@
                 "### Customize configuration\n" +
                 "See [Configuration Reference](https://cli.vuejs.org/config/).\n",
         }),
-        methods: {},
+        methods: {
+            findPost: function (id) {
+                this.$api.post.findPostById(id).then(res => {
+                    console.log(res.data);
+                    this.title=res.data.title;
+                    this.mainPicture=res.data.mainPic;
+                })
+            },
+        },
+        mounted() {
+            console.log(this.$route.params.postId)
+            this.findPost(this.$route.params.postId);
+
+        }
+
 
     };
 </script>
 
 <style scoped>
     .center80 {
-        width: 100%;
-        margin-left: 15%;
-        margin-right: 15%;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
     .center {

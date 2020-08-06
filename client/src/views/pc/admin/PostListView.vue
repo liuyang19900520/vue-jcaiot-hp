@@ -26,7 +26,6 @@
                         >New Post
                         </v-btn>
                     </template>
-
                 </v-dialog>
             </v-toolbar>
         </template>
@@ -68,7 +67,7 @@
                     sortable: false,
                     value: 'title',
                 },
-                {text: 'updateTime', value: 'updateTime', sortable: false,},
+                {text: 'updateTime', value: 'updateTime', sortable: true,},
                 {text: 'Actions', value: 'actions', sortable: false},
             ],
             posts: [],
@@ -107,7 +106,7 @@
 
         methods: {
             initialize() {
-                this.$api.post.selectPostsByPage(0,3).then(res => {
+                this.$api.post.selectPostsByPage(0, 99999).then(res => {
                     this.posts = res.data.content;
                 })
             },

@@ -1,5 +1,17 @@
 <template>
     <div>
+        <h1>Photo Album Viewer</h1>
+        <div id="appXXX"></div>
+        <form>
+            <input id="photoupload" type="file" accept="image/*">
+            <v-btn color="primary" class="mr-4 align-center" @click="test">submit</v-btn>
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <v-text-field
                 v-model="title"
                 label="请输入标题"
@@ -28,6 +40,7 @@
 </template>
 
 <script>
+    import s3Utils from "../../../utils/s3Utils";
     export default {
         name: "PostEditView",
         data: () => ({
@@ -38,6 +51,9 @@
             post:{},
         }),
         methods: {
+            test(){
+
+            },
             submit () {
                 this.post.title=this.title;
                 this.post.summary=this.summary;
@@ -54,6 +70,9 @@
                 })
             }
         },
+        created() {
+            s3Utils.listAlbums();
+        }
     }
 </script>
 

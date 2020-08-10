@@ -9,6 +9,13 @@
     "i18n:report": "./node_modules/.bin/vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@aws-sdk/client-cognito-identity": "^1.0.0-gamma.1",
+    "@aws-sdk/client-dynamodb": "^1.0.0-gamma.2",
+    "@aws-sdk/client-glacier": "^1.0.0-gamma.3",
+    "@aws-sdk/client-iam": "^1.0.0-gamma.2",
+    "@aws-sdk/client-lambda": "^1.0.0-gamma.2",
+    "@aws-sdk/client-s3": "^1.0.0-gamma.1",
+    "@aws-sdk/credential-provider-cognito-identity": "^1.0.0-gamma.2",
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "mavon-editor": "^2.8.3",

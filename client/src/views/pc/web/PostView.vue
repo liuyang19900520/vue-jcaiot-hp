@@ -3,7 +3,7 @@
     <div class="center80">
         <h1 class="center">{{title}}</h1>
         <br/>
-        <v-img :src="this.mainPicture" aspect-ratio="3"></v-img>
+        <v-img :src="this.mainPicture"></v-img>
         <br/>
         <mavon-editor class="mk"
                       :previewBackground="'#FFFFFFFF'"
@@ -23,39 +23,17 @@
             source: String
         },
         data: () => ({
-            title:null,
-            mainPicture:'',
-            mkValue: "# vue-jcaiot-hp\n" +
-                "\n" +
-                "## Project setup\n" +
-                "```\n" +
-                "npm install\n" +
-                "```\n" +
-                "\n" +
-                "### Compiles and hot-reloads for development\n" +
-                "```\n" +
-                "npm run serve\n" +
-                "```\n" +
-                "\n" +
-                "### Compiles and minifies for production\n" +
-                "```\n" +
-                "npm run build\n" +
-                "```\n" +
-                "\n" +
-                "### Lints and fixes files\n" +
-                "```\n" +
-                "npm run lint\n" +
-                "```\n" +
-                "\n" +
-                "### Customize configuration\n" +
-                "See [Configuration Reference](https://cli.vuejs.org/config/).\n",
+            title: null,
+            mainPicture: '',
+            mkValue: ''
         }),
         methods: {
             findPost: function (id) {
                 this.$api.post.findPostById(id).then(res => {
                     console.log(res.data);
-                    this.title=res.data.title;
-                    this.mainPicture=res.data.mainPic;
+                    this.title = res.data.title;
+                    this.mainPicture = res.data.mainPic;
+                    this.mkValue = res.data.content;
                 })
             },
         },

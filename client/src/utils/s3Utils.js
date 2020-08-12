@@ -28,14 +28,17 @@ const {
 } = require("@aws-sdk/credential-provider-cognito-identity");
 const { S3, ListObjectsCommand } = require("@aws-sdk/client-s3");
 
-const REGION = process.env.REGION; //REGION
+const REGION = process.env.VUE_APP_REGION; //REGION
 // Initialize the Amazon Cognito credentials provider
-const region = process.env.REGION; //REGION
+const region = process.env.VUE_APP_REGION; //REGION
+console.log(REGION);
+console.log(region);
+
 const s3 = new S3({
     region: REGION,
     credentials: fromCognitoIdentityPool({
         client: new CognitoIdentityClient({ region }),
-        identityPoolId: process.env.IDENTITY_POOL_ID, // IDENTITY_POOL_ID
+        identityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID, // IDENTITY_POOL_ID
     }),
 });
 
@@ -244,7 +247,9 @@ const addPhoto = async (albumName) => {
             const data = await s3.putObject(uploadParams);
             console.log(data);
             alert("Successfully uploaded photo.");
-            viewAlbum(albumName);
+            // viewAlbum(albumName);
+            let url='https://jcaiot.s3.ap-northeast-1.amazonaws.com/posts/';
+            return url+fileName;
         } catch (err) {
             return alert("There was an error uploading your photo: ", err.message);
         }

@@ -14,6 +14,10 @@ export class PostService {
     return createPost.save();
   }
 
+  async update(createPostDto: CreatePostDto): Promise<PostDocument> {
+    return this.postModel.updateOne(createPostDto);
+  }
+
   async findMain(num: number): Promise<PostDocument[]> {
     return this.postModel.find().limit(Number(num));
   }
@@ -31,6 +35,5 @@ export class PostService {
     const content = await this.postModel.findOne({ '_id': id });
     return content;
   }
-
 
 }

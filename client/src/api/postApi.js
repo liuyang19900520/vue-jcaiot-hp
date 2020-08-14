@@ -43,7 +43,22 @@ const post = {
                 'content-type': 'application/json'
             }
         });
-
+    },
+    updatePost(newPost) {
+        return axios({
+            method: 'put',
+            url: '/api/posts/',
+            data: {
+                "title": newPost.title,
+                "content": newPost.content,
+                "updateTime": newPost.updateTime,
+                "mainPic": newPost.mainPicture,
+                "summary": newPost.summary
+            },
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 };
 export default post;

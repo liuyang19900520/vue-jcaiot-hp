@@ -115,8 +115,7 @@
                 this.$router.push("/admin/posts/md")
             },
             editPost(postId) {
-                console.log("========", postId)
-                this.$router.push("/admin/posts/" + postId)
+                this.$router.push("/admin/posts/" + postId+"/md")
             },
 
             deleteItem(item) {

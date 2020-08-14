@@ -4,4 +4,5 @@ export class CreatePostDto {
   readonly updateTime: string;
   readonly mainPic: string;
   readonly summary: string;
+  readonly _id: string;
 }

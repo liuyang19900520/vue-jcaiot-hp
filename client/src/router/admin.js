@@ -35,6 +35,12 @@ const adminRouter = {
                 'dashboard': PostEditView
             }
         },
+        {
+            path: '/admin/posts/:postId/md',
+            components: {
+                'dashboard': PostEditView
+            }
+        }
     ]
 };
 

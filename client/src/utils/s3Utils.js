@@ -22,11 +22,11 @@ node s3_PhotoExample.js
 // snippet-start:[s3.JavaScript.photoAlbumExample.configV3]
 
 // Load the required clients and packages
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
+const {CognitoIdentityClient} = require("@aws-sdk/client-cognito-identity");
 const {
     fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { S3, ListObjectsCommand } = require("@aws-sdk/client-s3");
+const {S3, ListObjectsCommand} = require("@aws-sdk/client-s3");
 
 const REGION = process.env.VUE_APP_REGION; //REGION
 // Initialize the Amazon Cognito credentials provider
@@ -37,7 +37,7 @@ console.log(region);
 const s3 = new S3({
     region: REGION,
     credentials: fromCognitoIdentityPool({
-        client: new CognitoIdentityClient({ region }),
+        client: new CognitoIdentityClient({region}),
         identityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID, // IDENTITY_POOL_ID
     }),
 });
@@ -50,6 +50,7 @@ const albumBucketName = "jcaiot"; //BUCKET_NAME
 function getHtml(template) {
     return template.join("\n");
 }
+
 // Make getHTML function available to the browser
 window.getHTML = getHtml;
 
@@ -57,7 +58,7 @@ window.getHTML = getHtml;
 const listAlbums = async () => {
     try {
         const data = await s3.send(
-            new ListObjectsCommand({ Delimiter: "/", Bucket: albumBucketName })
+            new ListObjectsCommand({Delimiter: "/", Bucket: albumBucketName})
         );
 
         if (data.CommonPrefixes === undefined) {
@@ -122,7 +123,7 @@ const createAlbum = async (albumName) => {
     var albumKey = encodeURIComponent(albumName);
     try {
         const key = albumKey + "/";
-        const params = { Bucket: albumBucketName, Key: key };
+        const params = {Bucket: albumBucketName, Key: key};
         const data = await s3.putObject(params);
         console.log(data);
         alert("Successfully created album.");
@@ -235,7 +236,7 @@ const addPhoto = async (albumName) => {
         );
         console.log(data);
         const file = files[0];
-        const fileName = file.name;
+        const fileName = new Date().getTime() + "_" +file.name;
         const photoKey = albumPhotosKey + fileName;
         const uploadParams = {
             Bucket: albumBucketName,
@@ -248,8 +249,8 @@ const addPhoto = async (albumName) => {
             console.log(data);
             alert("Successfully uploaded photo.");
             // viewAlbum(albumName);
-            let url='https://jcaiot.s3.ap-northeast-1.amazonaws.com/posts/';
-            return url+fileName;
+            let url = 'https://jcaiot.s3.ap-northeast-1.amazonaws.com/posts/';
+            return url + fileName;
         } catch (err) {
             return alert("There was an error uploading your photo: ", err.message);
         }
@@ -259,8 +260,46 @@ const addPhoto = async (albumName) => {
         }
     }
 };
+const addPictureInsidePost = async (file) => {
+
+    try {
+        const albumPhotosKey = encodeURIComponent("posts") + "/";
+        const data = await s3.send(
+            new ListObjectsCommand({
+                Prefix: albumPhotosKey,
+                Bucket: albumBucketName,
+                ACL: "public-read",
+            })
+        );
+        console.log(data);
+
+        const fileName = new Date().getTime() + "_" + file.name;
+        const photoKey = albumPhotosKey + fileName;
+        const uploadParams = {
+            Bucket: albumBucketName,
+            Key: photoKey,
+            Body: file,
+            ACL: "public-read"
+        };
+        try {
+            const data = await s3.putObject(uploadParams);
+            console.log(data);
+            alert("Successfully uploaded photo.");
+            // viewAlbum(albumName);
+            let url = 'https://jcaiot.s3.ap-northeast-1.amazonaws.com/posts/';
+            return url + fileName;
+        } catch (err) {
+            return alert("There was an error uploading your photo: ", err.message);
+        }
+    } catch (err) {
+        if (!file) {
+            return alert("Choose a file to upload first.");
+        }
+    }
+};
 // Make addPhoto function available to the browser
 window.addPhoto = addPhoto;
+window.addPictureInsidePost = addPictureInsidePost;
 
 // snippet-end:[s3.JavaScript.photoAlbumExample.addPhotoV3]
 // snippet-start:[s3.JavaScript.photoAlbumExample.deletePhotoV3]
@@ -269,7 +308,7 @@ window.addPhoto = addPhoto;
 const deletePhoto = async (albumName, photoKey) => {
     try {
         console.log(photoKey);
-        const params = { Key: photoKey, Bucket: albumBucketName };
+        const params = {Key: photoKey, Bucket: albumBucketName};
         const data = await s3.deleteObject(params);
         console.log(data);
         console.log("Successfully deleted photo.");
@@ -288,15 +327,15 @@ window.deletePhoto = deletePhoto;
 const deleteAlbum = async (albumName) => {
     const albumKey = encodeURIComponent(albumName) + "/";
     try {
-        const params = { Bucket: albumBucketName, Prefix: albumKey };
+        const params = {Bucket: albumBucketName, Prefix: albumKey};
         const data = await s3.listObjects(params);
         const objects = data.Contents.map(function (object) {
-            return { Key: object.Key };
+            return {Key: object.Key};
         });
         try {
             const params = {
                 Bucket: albumBucketName,
-                Delete: { Objects: objects },
+                Delete: {Objects: objects},
                 Quiet: true,
             };
             const data = await s3.deleteObjects(params);
@@ -320,5 +359,6 @@ exports.listAlbums = listAlbums;
 exports.createAlbum = createAlbum;
 exports.viewAlbum = viewAlbum;
 exports.addPhoto = addPhoto;
+exports.addPictureInsidePost = addPictureInsidePost;
 exports.deletePhoto = deletePhoto;
 exports.deleteAlbum = deleteAlbum;

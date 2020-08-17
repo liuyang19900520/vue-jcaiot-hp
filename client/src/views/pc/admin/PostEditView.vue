@@ -21,7 +21,7 @@
                 @change="upload"
         ></v-file-input>
         <v-img :src="this.mainPicture"></v-img>
-        <mavon-editor v-model="content" @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
+        <mavon-editor ref=md v-model="content" @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
         <br>
         <v-spacer></v-spacer>
         <v-btn color="primary" class="mr-4 align-center" @click="submit">submit</v-btn>
@@ -30,7 +30,6 @@
 
 <script>
     import s3Utils from "../../../utils/s3Utils";
-
     export default {
         name: "PostEditView",
         data: () => ({
@@ -44,20 +43,20 @@
         methods: {
             // 绑定@imgAdd event
             $imgAdd(pos, $file) {
-                // 第一步.将图片上传到服务器.
-                var formdata = new FormData();
-                formdata.append('image', $file);
-                axios({
-                    url: 'server url',
-                    method: 'post',
-                    data: formdata,
-                    headers: {'Content-Type': 'multipart/form-data'},
-                }).then((url) => {
+                s3Utils.addPictureInsidePost($file).then((url) => {
                     // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
                     // $vm.$img2Url 详情见本页末尾
-                    $vm.$img2Url(pos, url);
+                    this.$refs.md.$img2Url(pos, url);
                 })
             },
+            $imgDel(pos, $file) {
+                s3Utils.addPictureInsidePost($file).then((url) => {
+                    // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+                    // $vm.$img2Url 详情见本页末尾
+                    this.$refs.md.$img2Url(pos, url);
+                })
+            },
+
             upload() {
                 const files = document.getElementById("photoupload").files;
                 if (files.length) {

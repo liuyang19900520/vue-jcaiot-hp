@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostDocument } from './interfaces/post.interface';
@@ -32,6 +32,12 @@ export class PostController {
   @Get(':id')
   async findPostById(@Param('id') id): Promise<any> {
     const result = this.postService.findPostById(id);
+    return result;
+  }
+
+  @Delete(':id')
+  async deletePostById(@Param('id') id): Promise<any> {
+    const result = this.postService.deletePostById(id);
     return result;
   }
 

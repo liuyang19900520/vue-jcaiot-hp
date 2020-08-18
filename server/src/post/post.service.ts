@@ -36,4 +36,15 @@ export class PostService {
     return content;
   }
 
-}
+  async deletePostById(id): Promise<any> {
+    const content = await this.postModel.deleteOne({ '_id': id });
+    let result = {};
+    if (content.deletedCount === 1) {
+      result = { 'deleteResult': 'success' };
+    } else {
+      result = { 'deleteResult': 'failed' };
+    }
+    return result;
+  }
+
+  }

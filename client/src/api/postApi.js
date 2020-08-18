@@ -59,6 +59,15 @@ const post = {
                 'content-type': 'application/json'
             }
         });
+    },
+    deletePost(id) {
+        return axios({
+            method: 'delete',
+            url: '/api/posts/' + id,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 };
 export default post;

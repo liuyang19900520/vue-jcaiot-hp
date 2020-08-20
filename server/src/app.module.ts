@@ -5,18 +5,21 @@ import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { MenuModule } from './menu/menu.module';
+import { PostModule } from './post/post.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
-import { PostModule } from './post/post.module';
+import expressConfig from './config/express.config';
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: ['.env.local'],
+      ignoreEnvFile: true,
       isGlobal: true,
-      load: [databaseConfig, jwtConfig],
+      load: [databaseConfig, jwtConfig, expressConfig],
     }),
     WinstonModule.forRoot({
       transports: [
@@ -48,11 +51,18 @@ import { PostModule } from './post/post.module';
       ],
       // options
     }),
-    MongooseModule.forRoot(process.env.DB_URI),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('database.uri'),
+      }),
+      inject: [ConfigService],
+    }),
     BannerModule, AuthModule, MenuModule, PostModule,
   ],
 })
 export class AppModule {
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)

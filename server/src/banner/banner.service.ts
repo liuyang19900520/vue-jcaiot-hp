@@ -11,9 +11,6 @@ export class BannerService {
 
   async create(createBannerDto: CreateBannerDto): Promise<Banner> {
     const createdBanner = new this.bannerModel(createBannerDto);
-    // const options = { upsert: true, new: true, setDefaultsOnInsert: true };
-    // return this.bannerModel.findOneAndUpdate({ lang: createBannerDto.lang }, createdBanner, options);
-    console.log('createBanner===', createdBanner.lang);
     return this.bannerModel.update({ lang: createdBanner.lang }, {
       $set: {
         content: createdBanner.content,

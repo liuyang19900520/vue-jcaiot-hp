@@ -1,14 +1,16 @@
 declare const module: any;
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { WINSTON_MODULE_NEST_PROVIDER, WinstonModule, utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, {
     logger: false,
   });
+  const configService: ConfigService = app.get(ConfigService);
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.useGlobalFilters(new HttpExceptionFilter(app.get(WINSTON_MODULE_NEST_PROVIDER)));
   app.useGlobalInterceptors(new TransformInterceptor);
@@ -20,12 +22,12 @@ async function bootstrap() {
     next();
   });
 
-  await app.listen(3000);
+  await app.listen(configService.get<string>('express.port'));
 
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
-}
+};
 
 bootstrap();

@@ -1,6 +1,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException, HttpStatus } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SystemException } from '../common/exceptions/system.exception';
 import { ApiErrorCode } from '../common/exceptions/api-error-code';
@@ -14,7 +14,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(username: string, password: string): Promise<any> {
     const user = await this.authService.validateUser(username, password);
     if (!user) {
-      throw new SystemException(ApiErrorCode.LOGIN_FAILD,"LOGIN_FAILD",HttpStatus.UNAUTHORIZED);
+      throw new SystemException(ApiErrorCode.LOGIN_FAILED,"LOGIN_FAILD",HttpStatus.UNAUTHORIZED);
     }
     return user;
   }

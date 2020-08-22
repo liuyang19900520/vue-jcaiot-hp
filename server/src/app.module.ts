@@ -1,55 +1,58 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
-import { BannerModule } from './banner/banner.module';
-import { AuthModule } from './auth/auth.module';
-import { LoggerMiddleware } from './common/middleware/logger.middleware';
-import { MenuModule } from './menu/menu.module';
-import { PostModule } from './post/post.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import expressConfig from './config/express.config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { BannerModule } from './banner/banner.module';
+import { AuthModule } from './auth/auth.module';
+import { MenuModule } from './menu/menu.module';
+import { PostModule } from './post/post.module';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env.local'],
-      ignoreEnvFile: true,
+      envFilePath: ['.env.local', '.env.development'],
       isGlobal: true,
       load: [databaseConfig, jwtConfig, expressConfig],
     }),
-    WinstonModule.forRoot({
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike(),
-          ),
-        }),
-        new winston.transports.File({
-          filename: process.env.INFO_LOG_PATH, level: 'info', format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike(),
-          ),
-        }),
-        new winston.transports.File({
-          filename: process.env.WARN_LOG_PATH, level: 'warn', format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike(),
-          ),
-        }),
-        new winston.transports.File({
-          filename: process.env.ERROR_LOG_PATH, level: 'error', format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike(),
-          ),
-        }),
-        // other transports...
-      ],
-      // options
+    WinstonModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        transports: [
+          new winston.transports.Console({
+            format: winston.format.combine(
+              winston.format.timestamp(),
+              nestWinstonModuleUtilities.format.nestLike(),
+            ),
+          }),
+          new winston.transports.File({
+            filename: configService.get<string>('express.infoPath'), level: 'info', format: winston.format.combine(
+              winston.format.timestamp(),
+              nestWinstonModuleUtilities.format.nestLike(),
+            ),
+          }),
+          new winston.transports.File({
+            filename: configService.get<string>('express.warnPath'), level: 'warn', format: winston.format.combine(
+              winston.format.timestamp(),
+              nestWinstonModuleUtilities.format.nestLike(),
+            ),
+          }),
+          new winston.transports.File({
+            filename: configService.get<string>('express.errorPath'), level: 'error', format: winston.format.combine(
+              winston.format.timestamp(),
+              nestWinstonModuleUtilities.format.nestLike(),
+            ),
+          }),
+          // other transports...
+        ],
+      }),
+      inject: [ConfigService],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -60,12 +63,13 @@ import expressConfig from './config/express.config';
     }),
     BannerModule, AuthModule, MenuModule, PostModule,
   ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+  ],
 })
-export class AppModule {
 
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('*');
-  };
+export class AppModule {
 }

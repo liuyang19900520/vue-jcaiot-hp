@@ -12,14 +12,17 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     const response = ctx.getResponse();
     const request = ctx.getRequest();
     let status = 500;
+
     if (exception instanceof HttpException) {
       status = exception.getStatus();
     }
+
     if (status != 500) {
       this.logger.warn(exception);
     } else {
       this.logger.error(exception);
     }
+
     if (exception instanceof SystemException) {
       response
         .status(status)
@@ -27,7 +30,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: exception.getErrorCode(),
           message: exception.getErrorMessage(),
           data: {
-            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString,
+            date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
             path: request.url,
           },
         });
@@ -38,7 +41,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
           code: '1',
           message: exception.message,
           data: {
-            date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),
+            date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
             path: request.url,
           },
         });

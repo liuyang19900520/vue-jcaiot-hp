@@ -1,5 +1,4 @@
 import { Document, Schema } from 'mongoose';
-import { Exclude } from 'class-transformer';
 
 
 export class AddUserDTO {
@@ -17,7 +16,7 @@ export interface User extends Document {
     password?: string;
     email?: string;
     salt?: string;
-    flag?: String;
+    flag?: string;
 }
 
 

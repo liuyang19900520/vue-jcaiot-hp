@@ -1,8 +1,10 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { PostDocument } from './interfaces/post.interface';
 import { CreatePostDto } from './dto/create-post.dto';
+import { SystemException } from '../common/exceptions/system.exception';
+import { ApiErrorCode } from '../common/exceptions/api-error-code';
 
 @Injectable()
 export class PostService {
@@ -15,7 +17,7 @@ export class PostService {
   }
 
   async update(createPostDto: CreatePostDto): Promise<PostDocument> {
-    return this.postModel.updateOne(createPostDto);
+    return this.postModel.update({ '_id': createPostDto._id }, { $set: createPostDto });
   }
 
   async findMain(num: number): Promise<PostDocument[]> {
@@ -27,7 +29,6 @@ export class PostService {
     const content = await this.postModel.find().skip(skipCount).limit(Number(pageCount));
     const countAll = Math.ceil(await this.postModel.countDocuments() / pageCount);
     const result = { 'content': content, 'countAll': countAll };
-    console.log('result===', result);
     return result;
   }
 
@@ -42,9 +43,9 @@ export class PostService {
     if (content.deletedCount === 1) {
       result = { 'deleteResult': 'success' };
     } else {
-      result = { 'deleteResult': 'failed' };
+      throw new SystemException(ApiErrorCode.DELETE_ERROR, 'DELETE_ERROR', HttpStatus.OK);
     }
     return result;
   }
 
-  }
+}

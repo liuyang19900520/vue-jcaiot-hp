@@ -21,9 +21,8 @@ export class UsersService {
 
   async create(AddUserDTO: AddUserDTO): Promise<any> {
     const returnDb = await this.findOne(AddUserDTO.username);
-    console.log(returnDb);
     if (returnDb) {
-      throw new SystemException(ApiErrorCode.REGISTER_FAILD, 'REGISTER_FAILD', HttpStatus.OK);
+      throw new SystemException(ApiErrorCode.REGISTER_FAILED, 'REGISTER_FAILED', HttpStatus.OK);
     }
     const salt: string = bcrypt.genSaltSync(this.configService.get<string>('jwt.saltRounds'));
     const newPassword = bcrypt.hashSync(AddUserDTO.password, salt);

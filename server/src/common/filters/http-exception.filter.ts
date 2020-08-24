@@ -38,7 +38,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
       response
         .status(status)
         .json({
-          code: '1',
+          code: '-1',
           message: exception.message,
           data: {
             date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
@@ -49,7 +49,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
       response
         .status(status)
         .json({
-          code: '1',
+          code: '-1',
           message: exception.message,
           data: {
             date: new Date().toLocaleDateString() + new Date().toLocaleTimeString(),

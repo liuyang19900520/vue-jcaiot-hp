@@ -12,6 +12,7 @@ import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
 import { MenuModule } from './menu/menu.module';
 import { PostModule } from './post/post.module';
+import { AssociationModule } from './association/association.module';
 
 
 @Module({
@@ -61,7 +62,7 @@ import { PostModule } from './post/post.module';
       }),
       inject: [ConfigService],
     }),
-    BannerModule, AuthModule, MenuModule, PostModule,
+    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule,
   ],
   providers: [
     {

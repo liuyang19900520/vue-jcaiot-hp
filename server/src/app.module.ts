@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 import { MenuModule } from './menu/menu.module';
 import { PostModule } from './post/post.module';
 import { AssociationModule } from './association/association.module';
+import { EnterpriseModule } from './enterprise/enterprise.module';
 
 
 @Module({
@@ -62,7 +63,7 @@ import { AssociationModule } from './association/association.module';
       }),
       inject: [ConfigService],
     }),
-    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule,
+    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule, EnterpriseModule,
   ],
   providers: [
     {

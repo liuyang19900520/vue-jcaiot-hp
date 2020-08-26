@@ -42,8 +42,6 @@
             this.findPost(this.$route.params.postId);
 
         }
-
-
     };
 </script>
 

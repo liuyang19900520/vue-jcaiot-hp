@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "MembernterpriseView",
+  name: "MemberEnterprise",
 
   data() {
     return {

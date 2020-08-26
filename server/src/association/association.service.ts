@@ -19,7 +19,4 @@ export class AssociationService {
     return this.associationModel.find().exec();
   }
 
-  async findOne(lang: string): Promise<Association> {
-    return this.associationModel.findOne({ lang: lang });
-  }
 }

@@ -19,8 +19,4 @@ export class AssociationController {
     return this.AssociationService.findAll();
   }
 
-  @Get(':lang')
-  async findOne(@Param('lang') lang: string): Promise<Association> {
-    return this.AssociationService.findOne(lang);
-  }
 }

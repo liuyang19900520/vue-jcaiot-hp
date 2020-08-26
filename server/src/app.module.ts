@@ -14,6 +14,7 @@ import { MenuModule } from './menu/menu.module';
 import { PostModule } from './post/post.module';
 import { AssociationModule } from './association/association.module';
 import { EnterpriseModule } from './enterprise/enterprise.module';
+import { ExpertModule } from './expert/expert.module';
 
 
 @Module({
@@ -63,7 +64,7 @@ import { EnterpriseModule } from './enterprise/enterprise.module';
       }),
       inject: [ConfigService],
     }),
-    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule, EnterpriseModule,
+    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule, EnterpriseModule, ExpertModule,
   ],
   providers: [
     {

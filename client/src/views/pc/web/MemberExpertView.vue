@@ -1,21 +1,10 @@
 <template>
   <div class="expert-card">
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
-    <ExpertCard></ExpertCard>
+
+    <ExpertCard v-for="(expert, i) in experts" class="post-card-margin" :key="i"
+                :name="expert.name"
+                :detail="expert.detail"
+                :picture="expert.picture"></ExpertCard>
   </div>
 </template>
 <script>
@@ -25,8 +14,19 @@ export default {
   name: "MemberExpertView",
   components: {ExpertCard},
   data: () => ({
-    show: false,
+    experts: '',
   }),
+  methods: {
+    findExperts: function () {
+      this.$api.expert.selectExperts().then(res => {
+        this.experts = res.data;
+      })
+    },
+  },
+  mounted() {
+    this.findExperts();
+
+  }
 }
 </script>
 
@@ -36,5 +36,6 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin: 2%;
 }
 </style>

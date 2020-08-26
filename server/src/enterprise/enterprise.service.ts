@@ -19,7 +19,4 @@ export class EnterpriseService {
     return this.enterpriseModel.find().exec();
   }
 
-  async findOne(lang: string): Promise<Enterprise> {
-    return this.enterpriseModel.findOne({ lang: lang });
-  }
 }

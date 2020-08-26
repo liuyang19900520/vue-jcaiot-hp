@@ -8,8 +8,9 @@ import menu from './menuApi';
 import post from './postApi';
 import association from './associationApi';
 import enterprise from './enterpriseApi';
+import expert from './expertApi';
 
 // 导出接口
 export default {
-    banner, auth, menu, post, association, enterprise
+    banner, auth, menu, post, association, enterprise, expert
 };

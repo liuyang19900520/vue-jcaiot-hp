@@ -1,29 +1,29 @@
 <template>
   <v-card
       class="mx-auto expert-card-view-margin"
-      max-width="344"
+      width="344"
   >
-    <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        height="200px"
-    ></v-img>
-
+    <v-img :src="this.picture" height="200px"></v-img>
     <v-card-title>
-      Top western road trips
+      {{ this.name }}
     </v-card-title>
-
     <v-card-subtitle>
-      1,000 miles of wonder
+      {{ this.detail }}
     </v-card-subtitle>
-
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "ExpertCard", data: () => ({
-    show: false,
-  }),
+  name: "ExpertCard",
+  data: () => ({}),
+  props: {
+    name: null,
+    detail: null,
+    picture: {
+      default: require('@/assets/default-pic.png')
+    },
+  }
 }
 </script>
 

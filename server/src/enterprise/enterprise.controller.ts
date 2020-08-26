@@ -19,8 +19,4 @@ export class EnterpriseController {
     return this.enterpriseService.findAll();
   }
 
-  @Get(':lang')
-  async findOne(@Param('lang') lang: string): Promise<Enterprise> {
-    return this.enterpriseService.findOne(lang);
-  }
 }

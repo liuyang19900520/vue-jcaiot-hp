@@ -3,6 +3,8 @@ import MenuView from "../views/pc/admin/MenuView";
 import BannerView from "../views/pc/admin/BannerView";
 import PostListView from "../views/pc/admin/PostListView";
 import PostEditView from "../views/pc/admin/PostEditView";
+import AssociationListView from "../views/pc/admin/AssociationListView";
+import AssociationEditView from "@/views/pc/admin/AssociationEditView";
 
 
 const adminRouter = {
@@ -40,7 +42,25 @@ const adminRouter = {
             components: {
                 'dashboard': PostEditView
             }
-        }
+        },
+        {
+            path: '/admin/associations',
+            components: {
+                'dashboard': AssociationListView
+            }
+        },
+        {
+            path: '/admin/associations/md',
+            components: {
+                'dashboard': AssociationEditView
+            }
+        },
+        {
+            path: '/admin/posts/:associationId/md',
+            components: {
+                'dashboard': AssociationEditView
+            }
+        },
     ]
 };
 

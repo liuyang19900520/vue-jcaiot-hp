@@ -10,5 +10,14 @@ const association = {
             }
         });
     },
+    findAssociationById(id) {
+        return axios({
+            method: 'get',
+            url: '/api/associations/' + id,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    },
 };
 export default association;

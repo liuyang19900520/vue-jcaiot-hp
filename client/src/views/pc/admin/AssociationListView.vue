@@ -1,13 +1,13 @@
 <template>
   <v-data-table
       :headers="headers"
-      :items="posts"
+      :items="associations"
       sort-by="calories"
       class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>My Posts</v-toolbar-title>
+        <v-toolbar-title>My Associations</v-toolbar-title>
         <v-divider
             class="mx-4"
             inset
@@ -22,8 +22,8 @@
                 class="mb-2"
                 v-bind="attrs"
                 v-on="on"
-                @click="createPost"
-            >New Post
+                @click="createAssociation"
+            >New Association
             </v-btn>
           </template>
         </v-dialog>
@@ -33,7 +33,7 @@
       <v-icon
           small
           class="mr-2"
-          @click="editPost(item._id)"
+          @click="editAssociation(item._id)"
       >
         mdi-pencil
       </v-icon>
@@ -59,15 +59,15 @@ export default {
         value: '_id',
       },
       {
-        text: 'Title',
+        text: 'Name',
         align: 'start',
         sortable: false,
-        value: 'title',
+        value: 'name',
       },
       {text: 'updateTime', value: 'updateTime', sortable: true,},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
-    posts: [],
+    associations: [],
   }),
   watch: {
     dialog(val) {
@@ -81,20 +81,19 @@ export default {
 
   methods: {
     initialize() {
-      this.$api.post.selectPostsByPage(0, 99999).then(res => {
-        this.posts = res.data.content;
+      this.$api.association.selectAssociations().then(res => {
+        this.associations = res.data;
       })
     },
-    createPost() {
-      this.$router.push("/admin/posts/md")
+    createAssociation() {
+      this.$router.push("/admin/associations/md")
     },
-    editPost(postId) {
-      this.$router.push("/admin/posts/" + postId + "/md")
+    editAssociation(associationId) {
+      this.$router.push("/admin/associations/" + associationId + "/md")
     },
-    deletePost(postId) {
+    deletePost(associationId) {
       confirm('Are you sure you want to delete this item?')
-      && this.$api.post.deletePost(postId).then(res => {
-        console.log(res);
+      && this.$api.post.deletePost(associationId).then(res => {
         if (res.code === '0') {
           this.initialize();
         }

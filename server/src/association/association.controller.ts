@@ -19,4 +19,10 @@ export class AssociationController {
     return this.AssociationService.findAll();
   }
 
+  @Get(':id')
+  async findPostById(@Param('id') id): Promise<any> {
+    const result = this.AssociationService.findById(id);
+    return result;
+  }
+
 }

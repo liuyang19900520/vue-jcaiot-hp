@@ -19,6 +19,6 @@ export class MenuService {
   }
 
   async listMenu(adminType: string): Promise<Menu[]> {
-    return this.menuModel.find({ admin: adminType });
+    return this.menuModel.find({ admin: adminType },null,{sort:{'order':1}});
   }
 }

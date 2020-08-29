@@ -14,7 +14,7 @@ const routerPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
     if (typeof (location) == "string") {
         let Separator = "&";
-        if (location.indexOf('?') == -1) {
+        if (location.indexOf('?') === -1) {
             Separator = '?';
         }
         location = location + Separator + "random=" + Math.random();

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from '@nestjs/common';
 import { AssociationDto } from './dto/association.dto';
 import { AssociationService } from './association.service';
 import { Association } from './interfaces/association.interface';
@@ -25,4 +25,14 @@ export class AssociationController {
     return result;
   }
 
+  @Put()
+  async update(@Body() associationDto: AssociationDto) {
+    await this.AssociationService.update(associationDto);
+  }
+
+  @Delete(':id')
+  async deletePostById(@Param('id') id): Promise<any> {
+    const result = await this.AssociationService.deleteById(id);
+    return result;
+  }
 }

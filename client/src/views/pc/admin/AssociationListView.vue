@@ -39,7 +39,7 @@
       </v-icon>
       <v-icon
           small
-          @click="deletePost(item._id)"
+          @click="deleteAssociation(item._id)"
       >
         mdi-delete
       </v-icon>
@@ -91,9 +91,9 @@ export default {
     editAssociation(associationId) {
       this.$router.push("/admin/associations/" + associationId + "/md")
     },
-    deletePost(associationId) {
+    deleteAssociation(associationId) {
       confirm('Are you sure you want to delete this item?')
-      && this.$api.post.deletePost(associationId).then(res => {
+      && this.$api.association.deleteAssociation(associationId).then(res => {
         if (res.code === '0') {
           this.initialize();
         }

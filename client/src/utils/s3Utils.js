@@ -223,8 +223,7 @@ window.viewAlbum = viewAlbum;
 // snippet-start:[s3.JavaScript.photoAlbumExample.addPhotoV3]
 
 // Add a photo to an album
-const addPhoto = async (albumName) => {
-    const files = document.getElementById("photoupload").files;
+const addPhoto = async (albumName, file) => {
     try {
         const albumPhotosKey = encodeURIComponent(albumName) + "/";
         const data = await s3.send(
@@ -235,8 +234,7 @@ const addPhoto = async (albumName) => {
             })
         );
         console.log(data);
-        const file = files[0];
-        const fileName = new Date().getTime() + "_" +file.name;
+        const fileName = new Date().getTime() + "_" + file.name;
         const photoKey = albumPhotosKey + fileName;
         const uploadParams = {
             Bucket: albumBucketName,
@@ -249,13 +247,13 @@ const addPhoto = async (albumName) => {
             console.log(data);
             alert("Successfully uploaded photo.");
             // viewAlbum(albumName);
-            let url = 'https://jcaiot.s3.ap-northeast-1.amazonaws.com/posts/';
+            let url = 'https://jcaiot.s3.ap-northeast-1.amazonaws.com/' + albumName + '/';
             return url + fileName;
         } catch (err) {
             return alert("There was an error uploading your photo: ", err.message);
         }
     } catch (err) {
-        if (!files.length) {
+        if (!file) {
             return alert("Choose a file to upload first.");
         }
     }

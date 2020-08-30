@@ -1,10 +1,10 @@
-declare const module: any;
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
+
+declare const module: any;
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, {
@@ -12,7 +12,6 @@ const bootstrap = async () => {
   });
   const configService: ConfigService = app.get(ConfigService);
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
-  app.useGlobalFilters(new HttpExceptionFilter(app.get(WINSTON_MODULE_NEST_PROVIDER)));
   app.useGlobalInterceptors(new TransformInterceptor);
   app.enableCors();
   app.use((req, res, next) => {

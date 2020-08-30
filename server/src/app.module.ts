@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import expressConfig from './config/express.config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { BannerModule } from './banner/banner.module';
 import { AuthModule } from './auth/auth.module';
@@ -15,6 +15,7 @@ import { PostModule } from './post/post.module';
 import { AssociationModule } from './association/association.module';
 import { EnterpriseModule } from './enterprise/enterprise.module';
 import { ExpertModule } from './expert/expert.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 
 @Module({
@@ -70,6 +71,10 @@ import { ExpertModule } from './expert/expert.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
   ],
 })

@@ -19,7 +19,8 @@ export class TransformInterceptor<T>
     next: CallHandler<T>,
   ): Observable<Response<T>> {
     return next.handle().pipe(map(data => ({
-      data, code: "0",
+      data,
+      code: "0",
       message: 'request success',
     })));
   }

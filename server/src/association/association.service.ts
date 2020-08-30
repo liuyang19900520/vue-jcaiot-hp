@@ -1,9 +1,10 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Association } from './interfaces/association.interface';
 import { AssociationDto } from './dto/association.dto';
-import { PostDocument } from '../post/interfaces/post.interface';
+import { SystemException } from '../common/exceptions/system.exception';
+import { ApiErrorCode } from '../common/exceptions/api-error-code';
 
 @Injectable()
 export class AssociationService {
@@ -12,7 +13,7 @@ export class AssociationService {
 
   async create(associationDto: AssociationDto): Promise<Association> {
     const createdBanner = new this.associationModel(associationDto);
-    return null;
+    return createdBanner.save();
 
   }
 
@@ -20,9 +21,23 @@ export class AssociationService {
     return await this.associationModel.find().exec();
   }
 
-  async findById(id): Promise<PostDocument> {
-    const content = await this.associationModel.findOne({ '_id': id });
-    return content;
+  async findById(id): Promise<Association> {
+    return await this.associationModel.findOne({ '_id': id });
+  }
+
+  async update(associationDto: AssociationDto): Promise<Association> {
+    return this.associationModel.update({ '_id': associationDto._id }, { $set: associationDto });
+  }
+
+  async deleteById(id): Promise<any> {
+    const content = await this.associationModel.deleteOne({ '_id': id });
+    let result = {};
+    if (content.deletedCount === 1) {
+      result = { 'deleteResult': 'success' };
+    } else {
+      throw new SystemException(ApiErrorCode.DELETE_ERROR, 'DELETE_ERROR', HttpStatus.OK);
+    }
+    return result;
   }
 
 }

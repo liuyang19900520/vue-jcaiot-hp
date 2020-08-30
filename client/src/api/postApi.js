@@ -49,6 +49,7 @@ const post = {
             method: 'put',
             url: '/api/posts/',
             data: {
+                "_id": newPost._id,
                 "title": newPost.title,
                 "content": newPost.content,
                 "updateTime": newPost.updateTime,

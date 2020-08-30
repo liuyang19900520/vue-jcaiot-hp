@@ -56,7 +56,7 @@ const adminRouter = {
             }
         },
         {
-            path: '/admin/posts/:associationId/md',
+            path: '/admin/associations/:associationId/md',
             components: {
                 'dashboard': AssociationEditView
             }

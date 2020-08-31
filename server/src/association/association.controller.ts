@@ -31,7 +31,7 @@ export class AssociationController {
   }
 
   @Delete(':id')
-  async deletePostById(@Param('id') id): Promise<any> {
+  async deleteById(@Param('id') id): Promise<any> {
     const result = await this.AssociationService.deleteById(id);
     return result;
   }

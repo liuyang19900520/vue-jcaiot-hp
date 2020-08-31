@@ -1,4 +1,12 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Inject, UnauthorizedException } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  HttpStatus,
+  Inject,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { SystemException } from '../exceptions/system.exception';
 import { Logger } from 'winston';
 
@@ -11,13 +19,12 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    let status = 500;
+    const status =
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    if (exception instanceof HttpException) {
-      status = exception.getStatus();
-    }
-
-    if (status != 500) {
+    if (status != HttpStatus.INTERNAL_SERVER_ERROR) {
       this.logger.warn(exception);
     } else {
       this.logger.error(exception);

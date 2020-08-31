@@ -10,5 +10,56 @@ const enterprise = {
             }
         });
     },
+    findEnterpriseById(id) {
+        return axios({
+            method: 'get',
+            url: '/api/enterprises/' + id,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    },
+    createEnterprise(newEnterprise) {
+        return axios({
+            method: 'post',
+            url: '/api/enterprises/',
+            data: {
+                "name": newEnterprise.name,
+                "detail": newEnterprise.detail,
+                "updateTime": newEnterprise.updateTime,
+                "picture": newEnterprise.picture,
+                "address": newEnterprise.address
+            },
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    },
+    updateEnterprise(newEnterprise) {
+        return axios({
+            method: 'put',
+            url: '/api/enterprises/',
+            data: {
+                "_id": newEnterprise._id,
+                "name": newEnterprise.name,
+                "detail": newEnterprise.detail,
+                "updateTime": newEnterprise.updateTime,
+                "picture": newEnterprise.picture,
+                "address": newEnterprise.address
+            },
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    },
+    deleteEnterprise(id) {
+        return axios({
+            method: 'delete',
+            url: '/api/enterprises/' + id,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
 };
 export default enterprise;

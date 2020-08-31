@@ -5,6 +5,8 @@ import PostListView from "../views/pc/admin/PostListView";
 import PostEditView from "../views/pc/admin/PostEditView";
 import AssociationListView from "../views/pc/admin/AssociationListView";
 import AssociationEditView from "@/views/pc/admin/AssociationEditView";
+import EnterpriseListView from "@/views/pc/admin/EnterpriseListView";
+import EnterpriseEditView from "@/views/pc/admin/EnterpriseEditView";
 
 
 const adminRouter = {
@@ -59,6 +61,24 @@ const adminRouter = {
             path: '/admin/associations/:associationId/md',
             components: {
                 'dashboard': AssociationEditView
+            }
+        },
+        {
+            path: '/admin/enterprises',
+            components: {
+                'dashboard': EnterpriseListView
+            }
+        },
+        {
+            path: '/admin/enterprises/md',
+            components: {
+                'dashboard': EnterpriseEditView
+            }
+        },
+        {
+            path: '/admin/enterprises/:enterpriseId/md',
+            components: {
+                'dashboard': EnterpriseEditView
             }
         },
     ]

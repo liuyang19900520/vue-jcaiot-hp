@@ -12,8 +12,8 @@ export class AssociationService {
   }
 
   async create(associationDto: AssociationDto): Promise<Association> {
-    const createdBanner = new this.associationModel(associationDto);
-    return createdBanner.save();
+    const createdAssociation = new this.associationModel(associationDto);
+    return createdAssociation.save();
 
   }
 

@@ -2,19 +2,19 @@
   <div>
     <v-text-field
         v-model="enterprise.name"
-        label="请输入协会名称"
+        label="Please enter the enterprise name"
         prepend-icon="mdi-table"
         required
     ></v-text-field>
     <v-text-field
         v-model="enterprise.detail"
-        label="请输入协会简介"
+        label="Please enter the enterprise details"
         prepend-icon="mdi-bookmark-minus-outline"
         required
     ></v-text-field>
     <v-file-input
         v-model="uploadFile"
-        label="选择上传缩略协会图片"
+        label="Please upload the enterprise picture"
         filled
         prepend-icon="mdi-camera"
         @change="upload"
@@ -65,14 +65,12 @@ export default {
     createEnterprise: function () {
       this.$api.enterprise.createEnterprise(this.enterprise).then(res => {
         console.log(res.data);
-        alert("成功")
         this.$router.push("/admin/enterprises");
       })
     },
     updateEnterprise: function () {
       this.$api.enterprise.updateEnterprise(this.enterprise).then(res => {
         console.log(res.data);
-        alert("成功")
         this.$router.push("/admin/enterprises");
       })
     },

@@ -7,6 +7,8 @@ import AssociationListView from "../views/pc/admin/AssociationListView";
 import AssociationEditView from "@/views/pc/admin/AssociationEditView";
 import EnterpriseListView from "@/views/pc/admin/EnterpriseListView";
 import EnterpriseEditView from "@/views/pc/admin/EnterpriseEditView";
+import ExpertListView from "@/views/pc/admin/ExpertListView";
+import ExpertEditView from "@/views/pc/admin/ExpertEditView";
 
 
 const adminRouter = {
@@ -79,6 +81,24 @@ const adminRouter = {
             path: '/admin/enterprises/:enterpriseId/md',
             components: {
                 'dashboard': EnterpriseEditView
+            }
+        },
+        {
+            path: '/admin/experts',
+            components: {
+                'dashboard': ExpertListView
+            }
+        },
+        {
+            path: '/admin/experts/md',
+            components: {
+                'dashboard': ExpertEditView
+            }
+        },
+        {
+            path: '/admin/experts/:expertId/md',
+            components: {
+                'dashboard': ExpertEditView
             }
         },
     ]

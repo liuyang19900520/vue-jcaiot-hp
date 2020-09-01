@@ -88,14 +88,12 @@ export default {
     createPost: function () {
       this.$api.post.createPost(this.post).then(res => {
         console.log(res.data);
-        alert("成功")
         this.$router.push("/admin/posts");
       })
     },
     updatePost: function () {
       this.$api.post.updatePost(this.post).then(res => {
         console.log(res.data);
-        alert("成功")
         this.$router.push("/admin/posts");
       })
     },

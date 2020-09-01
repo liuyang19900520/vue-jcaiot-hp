@@ -1,20 +1,20 @@
 <template>
   <div>
     <v-text-field
-        v-model="association.name"
-        label="Please enter the association name"
+        v-model="expert.name"
+        label="Please enter the expert name"
         prepend-icon="mdi-table"
         required
     ></v-text-field>
     <v-text-field
-        v-model="association.detail"
-        label="Please enter the association name"
+        v-model="expert.detail"
+        label="Please enter the expert details"
         prepend-icon="mdi-bookmark-minus-outline"
         required
     ></v-text-field>
     <v-file-input
         v-model="uploadFile"
-        label="Please upload the association picture"
+        label="Please upload the expert picture"
         filled
         prepend-icon="mdi-camera"
         @change="upload"
@@ -30,10 +30,10 @@
 import s3Utils from "../../../utils/s3Utils";
 
 export default {
-  name: "AssociationEditView",
+  name: "ExpertEditView",
 
   data: () => ({
-    association: {},
+    expert: {},
     uploadFile: '',
     pictureUrl: '',
   }),
@@ -42,51 +42,51 @@ export default {
     upload() {
       const file = this.uploadFile
       if (file) {
-        s3Utils.addPhoto("associations", file).then((value) => {
+        s3Utils.addPhoto("experts", file).then((value) => {
           this.pictureUrl = value;
         });
       }
     },
     submit() {
       this.getForm();
-      this.association._id = this.$route.params.associationId;
-      if (this.association._id) {
-        this.updateAssociation();
+      this.expert._id = this.$route.params.expertId;
+      if (this.expert._id) {
+        this.updateExpert();
       } else {
-        this.createAssociation();
+        this.createExpert();
       }
     },
-    findAssociation: function (id) {
-      this.$api.association.findAssociationById(id).then(res => {
-        this.association = res.data;
+    findExpert: function (id) {
+      this.$api.expert.findExpertById(id).then(res => {
+        this.expert = res.data;
         this.pictureUrl = res.data.picture
       })
     },
-    createAssociation: function () {
-      this.$api.association.createAssociation(this.association).then(res => {
+    createExpert: function () {
+      this.$api.expert.createExpert(this.expert).then(res => {
         console.log(res.data);
-        this.$router.push("/admin/associations");
+        this.$router.push("/admin/experts");
       })
     },
-    updateAssociation: function () {
-      this.$api.association.updateAssociation(this.association).then(res => {
+    updateExpert: function () {
+      this.$api.expert.updateExpert(this.expert).then(res => {
         console.log(res.data);
-        this.$router.push("/admin/associations");
+        this.$router.push("/admin/experts");
       })
     },
     getForm: function () {
-      this.association.picture = this.pictureUrl;
+      this.expert.picture = this.pictureUrl;
       let dateNow = new Date();
-      this.association.updateTime = dateNow.getFullYear() + '/'
+      this.expert.updateTime = dateNow.getFullYear() + '/'
           + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
           + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
-      console.log(this.association)
+      console.log(this.expert)
     }
   },
 
   created() {
-    if (this.$route.params.associationId) {
-      this.findAssociation(this.$route.params.associationId);
+    if (this.$route.params.expertId) {
+      this.findExpert(this.$route.params.expertId);
     }
 
   }

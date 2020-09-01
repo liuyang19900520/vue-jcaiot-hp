@@ -3,7 +3,6 @@ import { EnterpriseDto } from './dto/enterprise.dto';
 import { EnterpriseService } from './enterprise.service';
 import { Enterprise } from './interfaces/enterprise.interface';
 import { Logger } from 'winston';
-import { AssociationDto } from '../association/dto/association.dto';
 
 @Controller('api/enterprises')
 export class EnterpriseController {

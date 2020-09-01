@@ -57,7 +57,7 @@
             getBanner: function () {
                 let self = this;
                 this.$api.banner.selectBanner(this.tabLang).then(res => {
-                    if (res.code == 0) {
+                    if (res.data.code === 0) {
                         self.bannerTitle = res.data.banner;
                         self.bannerContent = res.data.content;
                     }
@@ -67,9 +67,9 @@
             },
             submit: function () {
                 this.$api.banner.editBanner(this.tabLang, this.bannerTitle, this.bannerContent).then(res => {
-                    if (res.code == 0) {
+                    if (res.data.code === 0) {
                         this.snackbar = true;
-                        this.text = "保存成功";
+                        this.text = "Success";
                     }
                 });
             }

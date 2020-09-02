@@ -14,5 +14,14 @@ const auth = {
             }
         });
     },
+    profile(){
+        return axios({
+            method: 'get',
+            url: '/auth/profile',
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
 };
 export default auth;

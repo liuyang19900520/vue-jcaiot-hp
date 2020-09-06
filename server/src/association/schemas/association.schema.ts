@@ -5,5 +5,6 @@ export const AssociationSchema = new mongoose.Schema({
   picture: String,
   detail: String,
   address: String,
-  updateTime: String,
+  updateUser: String,
+  updateTime: Date,
 });

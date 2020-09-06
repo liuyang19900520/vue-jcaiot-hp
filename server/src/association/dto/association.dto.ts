@@ -4,5 +4,6 @@ export class AssociationDto {
   readonly picture: string;
   readonly detail: string;
   readonly address: string;
+  readonly updateUser: string;
   readonly updateTime: string;
 }

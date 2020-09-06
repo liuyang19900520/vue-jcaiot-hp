@@ -59,6 +59,7 @@ export default {
       this.$api.auth.login(this.username, this.password).then(res => {
         console.log(res.data.accessToken);
         storage.set("accessToken", res.data.accessToken);
+        storage.set("username", this.username);
         this.$router.push("/admin");
       }).catch(error => {
         console.log(error);

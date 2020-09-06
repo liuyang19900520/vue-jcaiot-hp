@@ -2,7 +2,7 @@
   <v-data-table
       :headers="headers"
       :items="associations"
-      sort-by="calories"
+      sort-by="updateTime"
       class="elevation-1"
   >
     <template v-slot:top>
@@ -44,10 +44,14 @@
         mdi-delete
       </v-icon>
     </template>
+    <template v-slot:item.updateTimeItem="{ item }">
+      <div>{{ item.updateTime | moment }}</div>
+    </template>
   </v-data-table>
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   data: () => ({
     dialog: false,
@@ -64,7 +68,7 @@ export default {
         sortable: false,
         value: 'name',
       },
-      {text: 'updateTime', value: 'updateTime', sortable: true,},
+      {text: 'updateTime', value: 'updateTimeItem', sortable: true,},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
     associations: [],
@@ -98,7 +102,13 @@ export default {
           this.initialize();
         }
       })
-    },
+    }
   },
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm:ss');
+    }
+  }
+
 }
 </script>

@@ -28,6 +28,7 @@
 
 <script>
 import s3Utils from "../../../utils/s3Utils";
+import storage from "@/store/storage";
 
 export default {
   name: "AssociationEditView",
@@ -76,10 +77,11 @@ export default {
     },
     getForm: function () {
       this.association.picture = this.pictureUrl;
-      let dateNow = new Date();
-      this.association.updateTime = dateNow.getFullYear() + '/'
-          + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
-          + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
+      this.association.updateUser = storage.get("username");
+      this.association.updateTime = new Date();
+      // this.association.updateTime = dateNow.getFullYear() + '/'
+      //     + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
+      //     + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
       console.log(this.association)
     }
   },

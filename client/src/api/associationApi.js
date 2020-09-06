@@ -26,9 +26,10 @@ const association = {
             data: {
                 "name": newAssociation.name,
                 "detail": newAssociation.detail,
-                "updateTime": newAssociation.updateTime,
                 "picture": newAssociation.picture,
-                "address": newAssociation.address
+                "address": newAssociation.address,
+                "updateTime": newAssociation.updateTime,
+                "updateUser":newAssociation.updateUser
             },
             headers: {
                 'content-type': 'application/json'
@@ -44,6 +45,7 @@ const association = {
                 "name": newAssociation.name,
                 "detail": newAssociation.detail,
                 "updateTime": newAssociation.updateTime,
+                "updateUser":newAssociation.updateUser,
                 "picture": newAssociation.picture,
                 "address": newAssociation.address
             },

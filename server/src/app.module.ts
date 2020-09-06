@@ -27,6 +27,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
     }),
     WinstonModule.forRootAsync({
       imports: [ConfigModule],
+      //import configService for env parameters
       useFactory: (configService: ConfigService) => ({
         transports: [
           new winston.transports.Console({

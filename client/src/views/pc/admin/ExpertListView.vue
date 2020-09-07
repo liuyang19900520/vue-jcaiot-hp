@@ -44,10 +44,15 @@
         mdi-delete
       </v-icon>
     </template>
+    <template v-slot:item.updateTime="{ item }">
+      <div>{{ item.updateTime | moment }}</div>
+    </template>
   </v-data-table>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   data: () => ({
     dialog: false,
@@ -100,5 +105,11 @@ export default {
       })
     },
   },
+
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm:ss');
+    }
+  }
 }
 </script>

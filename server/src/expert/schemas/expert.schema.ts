@@ -4,5 +4,6 @@ export const ExpertSchema = new mongoose.Schema({
   name: String,
   picture: String,
   detail: String,
-  updateTime: String,
+  updateUser: String,
+  updateTime: Date,
 });

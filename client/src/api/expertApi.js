@@ -28,7 +28,7 @@ const expert = {
                 "detail": newExpert.detail,
                 "updateTime": newExpert.updateTime,
                 "picture": newExpert.picture,
-                "address": newExpert.address
+                "updateUser": newExpert.updateUser,
             },
             headers: {
                 'content-type': 'application/json'
@@ -45,7 +45,7 @@ const expert = {
                 "detail": newExpert.detail,
                 "updateTime": newExpert.updateTime,
                 "picture": newExpert.picture,
-                "address": newExpert.address
+                "updateUser": newExpert.updateUser,
             },
             headers: {
                 'content-type': 'application/json'

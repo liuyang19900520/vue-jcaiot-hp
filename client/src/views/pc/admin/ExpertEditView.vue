@@ -28,6 +28,7 @@
 
 <script>
 import s3Utils from "../../../utils/s3Utils";
+import storage from "@/store/storage";
 
 export default {
   name: "ExpertEditView",
@@ -76,10 +77,8 @@ export default {
     },
     getForm: function () {
       this.expert.picture = this.pictureUrl;
-      let dateNow = new Date();
-      this.expert.updateTime = dateNow.getFullYear() + '/'
-          + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
-          + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
+      this.expert.updateTime =new Date();
+      this.expert.updateUser=storage.get("username");
       console.log(this.expert)
     }
   },

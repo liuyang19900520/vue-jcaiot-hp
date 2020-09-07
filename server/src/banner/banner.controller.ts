@@ -4,14 +4,14 @@ import { BannerService } from './banner.service';
 import { Banner } from './interfaces/banner.interface';
 import { Logger } from 'winston';
 
-@Controller('banners')
+@Controller('api/banners')
 export class BannerController {
   constructor(private readonly bannerService: BannerService, @Inject('winston') private readonly logger: Logger) {
   }
 
   @Post()
-  async create(@Body() createCatDto: CreateBannerDto) {
-    await this.bannerService.create(createCatDto);
+  async update(@Body() createCatDto: CreateBannerDto) {
+    await this.bannerService.update(createCatDto);
   }
 
   @Get()

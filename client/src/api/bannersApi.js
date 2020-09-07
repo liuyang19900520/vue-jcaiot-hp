@@ -2,16 +2,18 @@ import axios from '../utils/axiosUtils';
 
 const banner = {
     selectBanner(lang) {
-        return axios.get("/banners/" + lang);
+        return axios.get("/api/banners/" + lang);
     },
-    editBanner(lang, title, content) {
+    editBanner(lang, title, content,updateTime,updateUser) {
         return axios({
             method: 'post',
-            url: '/banners',
+            url: '/api/banners',
             data: {
                 lang: lang,
                 banner: title,
-                content: content
+                content: content,
+                updateTime:updateTime,
+                updateUser:updateUser
             },
             headers: {
                 'content-type': 'application/json'

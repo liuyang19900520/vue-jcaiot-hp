@@ -24,6 +24,7 @@ const errorHandle = (status, other) => {
         // 401: 未登录状态，跳转登录页
         case 401:
             storage.remove("accessToken");
+            storage.remove("username");
             setTimeout(() => {
                 toLogin();
             }, 1000);
@@ -33,6 +34,7 @@ const errorHandle = (status, other) => {
         case 403:
             console.log('登录过期，请重新登录');
             storage.remove("accessToken");
+            storage.remove("username");
             setTimeout(() => {
                 toLogin();
             }, 1000);
@@ -64,19 +66,16 @@ instance.interceptors.request.use(
 
 // 响应拦截器
 instance.interceptors.response.use(
+
     // 请求成功
     res => {
-        if (res.status === 200) {
-            return res.data;
-        } else {
+        if (res.status === 200||res.status === 201) {
             return res.data;
         }
     },
     // 请求失败
     error => {
-        const {
-            response
-        } = error;
+        const {response} = error;
         if (response) {
             // 请求已发出，但是不在2xx的范围 
             errorHandle(response.status, response.data.message);

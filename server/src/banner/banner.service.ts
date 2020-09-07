@@ -9,14 +9,16 @@ export class BannerService {
   constructor(@InjectModel('Banner') private readonly bannerModel: Model<Banner>) {
   }
 
-  async create(createBannerDto: CreateBannerDto): Promise<Banner> {
-    const createdBanner = new this.bannerModel(createBannerDto);
-    return this.bannerModel.update({ lang: createdBanner.lang }, {
+  async update(createBannerDto: CreateBannerDto): Promise<Banner> {
+    const result = await this.bannerModel.update({ lang: createBannerDto.lang }, {
       $set: {
-        content: createdBanner.content,
-        banner: createdBanner.banner,
+        content: createBannerDto.content,
+        banner: createBannerDto.banner,
+        updateUser:createBannerDto.updateUser,
+        updateTime:createBannerDto.updateTime
       },
     });
+    return result;
   }
 
   async findAll(): Promise<Banner[]> {

@@ -28,6 +28,7 @@
 
 <script>
 import s3Utils from "../../../utils/s3Utils";
+import storage from "@/store/storage";
 
 export default {
   name: "EnterpriseEditView",
@@ -76,10 +77,8 @@ export default {
     },
     getForm: function () {
       this.enterprise.picture = this.pictureUrl;
-      let dateNow = new Date();
-      this.enterprise.updateTime = dateNow.getFullYear() + '/'
-          + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
-          + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
+      this.enterprise.updateTime=new Date();
+      this.enterprise.updateUser=storage.get("username");
       console.log(this.enterprise)
     }
   },

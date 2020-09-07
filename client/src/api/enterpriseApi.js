@@ -26,9 +26,10 @@ const enterprise = {
             data: {
                 "name": newEnterprise.name,
                 "detail": newEnterprise.detail,
-                "updateTime": newEnterprise.updateTime,
                 "picture": newEnterprise.picture,
-                "address": newEnterprise.address
+                "address": newEnterprise.address,
+                "updateTime": newEnterprise.updateTime,
+                "updateUser": newEnterprise.updateUser,
             },
             headers: {
                 'content-type': 'application/json'

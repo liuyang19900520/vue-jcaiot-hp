@@ -1,5 +1,4 @@
 import AdminLayout from "../layout/AdminLayout";
-import MenuView from "../views/pc/admin/MenuView";
 import BannerView from "../views/pc/admin/BannerView";
 import PostListView from "../views/pc/admin/PostListView";
 import PostEditView from "../views/pc/admin/PostEditView";
@@ -9,6 +8,8 @@ import EnterpriseListView from "@/views/pc/admin/EnterpriseListView";
 import EnterpriseEditView from "@/views/pc/admin/EnterpriseEditView";
 import ExpertListView from "@/views/pc/admin/ExpertListView";
 import ExpertEditView from "@/views/pc/admin/ExpertEditView";
+import MenuListView from "@/views/pc/admin/MenuListView";
+import MenuEditView from "@/views/pc/admin/MenuEditView";
 
 
 const adminRouter = {
@@ -18,15 +19,27 @@ const adminRouter = {
     },
     children: [
         {
-            path: '/admin/banner',
+            path: '/admin/banners',
             components: {
                 'dashboard': BannerView
             }
         },
         {
-            path: '/admin/menu',
+            path: '/admin/menus',
             components: {
-                'dashboard': MenuView
+                'dashboard': MenuListView
+            }
+        },
+        {
+            path: '/admin/menus/md',
+            components: {
+                'dashboard': MenuEditView
+            }
+        },
+        {
+            path: '/admin/menus/:menuId/md',
+            components: {
+                'dashboard': MenuEditView
             }
         },
         {

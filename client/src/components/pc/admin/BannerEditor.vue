@@ -16,7 +16,7 @@
           auto-grow></v-textarea>
       <div>
         <v-spacer></v-spacer>
-        <v-btn color="success"
+        <v-btn color="primary"
                class="mr-4" @click="submit">submit
         </v-btn>
       </div>

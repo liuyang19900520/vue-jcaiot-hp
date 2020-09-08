@@ -5,4 +5,6 @@ export const MenuSchema = new mongoose.Schema({
   title: String,
   link: String,
   icon: String,
+  updateUser: String,
+  updateTime: Date,
 });

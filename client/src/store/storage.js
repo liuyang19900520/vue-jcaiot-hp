@@ -9,6 +9,6 @@ let storage = {
         localStorage.removeItem(key);
     }
 
-}
+};
 
 export default storage;

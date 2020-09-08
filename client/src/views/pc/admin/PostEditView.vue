@@ -29,6 +29,7 @@
 
 <script>
 import s3Utils from "../../../utils/s3Utils";
+import storage from "@/store/storage";
 
 export default {
   name: "PostEditView",
@@ -47,6 +48,7 @@ export default {
       s3Utils.addPictureInsidePost($file).then((url) => {
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         // $vm.$img2Url 详情见本页末尾
+        console.log(url);
         this.$refs.md.$img2Url(pos, url);
       })
     },
@@ -102,10 +104,8 @@ export default {
       this.post.summary = this.summary;
       this.post.mainPicture = this.mainPicture;
       this.post.content = this.content;
-      let dateNow = new Date();
-      this.post.updateTime = dateNow.getFullYear() + '/'
-          + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
-          + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
+      this.post.updateUser=storage.get("username");
+      this.post.updateTime = new Date();
       console.log(this.post)
     }
   },

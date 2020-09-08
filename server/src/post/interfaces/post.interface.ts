@@ -4,4 +4,5 @@ export class PostDocument extends Document {
   readonly updateTime: string;
   readonly mainPic: string;
   readonly summary: string;
+  readonly updateUser: string;
 }

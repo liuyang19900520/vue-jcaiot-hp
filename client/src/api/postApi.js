@@ -37,7 +37,8 @@ const post = {
                 "content": newPost.content,
                 "updateTime": newPost.updateTime,
                 "mainPic": newPost.mainPicture,
-                "summary": newPost.summary
+                "summary": newPost.summary,
+                "updateUser": newPost.updateUser,
             },
             headers: {
                 'content-type': 'application/json'
@@ -54,7 +55,8 @@ const post = {
                 "content": newPost.content,
                 "updateTime": newPost.updateTime,
                 "mainPic": newPost.mainPicture,
-                "summary": newPost.summary
+                "summary": newPost.summary,
+                "updateUser": newPost.updateUser,
             },
             headers: {
                 'content-type': 'application/json'

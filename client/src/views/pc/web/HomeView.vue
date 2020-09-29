@@ -13,6 +13,7 @@
             <br/>
             <div class="post-card-list">
                 <HomePostCard v-for="(post, i) in posts" class="post-card-margin" :key="i"
+                              :post-id="post._id"
                               :post-img="post.mainPic"
                               :post-summary="post.summary"
                               :post-time="post.updateTime"

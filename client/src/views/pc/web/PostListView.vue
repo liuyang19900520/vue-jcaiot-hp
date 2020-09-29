@@ -27,13 +27,12 @@
                                 </div>
                             </v-card-text>
                             <v-card-actions>
-                                <v-spacer></v-spacer>
                                 <v-btn
                                         text
-                                        color="teal"
+                                        color="orange"
                                         @click="link2Page('/posts/'+item._id)"
                                 >
-                                    Learn More
+                                    Read More
                                 </v-btn>
                             </v-card-actions>
                         </div>

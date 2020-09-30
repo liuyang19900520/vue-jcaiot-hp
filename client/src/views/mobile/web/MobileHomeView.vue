@@ -12,12 +12,12 @@
       <h3>最新信息</h3>
       <br/>
       <div class="post-card-list">
-        <HomePostCard v-for="(post, i) in posts" class="post-card-margin" :key="i"
+        <MobileHomePostCard v-for="(post, i) in posts" class="post-card-margin" :key="i"
                       :post-id="post._id"
                       :post-img="post.mainPic"
                       :post-summary="post.summary"
                       :post-time="post.updateTime"
-                      :post-title="post.title"></HomePostCard>
+                      :post-title="post.title"></MobileHomePostCard>
       </div>
       <br/>
       <div class="center">
@@ -29,7 +29,6 @@
       <h3>加入我们</h3>
       <br/>
       <div class="join-us-div">
-        <v-img class="join-us-item" src="https://picsum.photos/510/300?random" aspect-ratio="1.7"></v-img>
         <div class="join-us-item">
           <JoinUsForm></JoinUsForm>
         </div>
@@ -41,12 +40,12 @@
 
 <script>
 import Carousels from "../../../components/pc/web/Carousels";
-import HomePostCard from "../../../components/pc/web/HomePostCard";
+import MobileHomePostCard from "../../../components/mobile/web/MobileHomePostCard";
 import JoinUsForm from "../../../components/pc/web/JoinUsForm";
 import routerUtils from '../../../utils/routerUtils';
 
 export default {
-  components: {Carousels, JoinUsForm, HomePostCard},
+  components: {Carousels, JoinUsForm, MobileHomePostCard},
   data: () => ({
     bannerTitle: null,
     bannerContent: null,

@@ -26,21 +26,26 @@
                     :disabled="!isEditing"
                     color="white"
                     label="Name"
+                    v-model="application.name"
             ></v-text-field>
             <v-text-field
                     :disabled="!isEditing"
                     color="white"
                     label="E-mail"
+                    v-model="application.email"
             ></v-text-field>
+            <v-select
+                    :disabled="!isEditing"
+                    color="white"
+                    label="Type"
+                    :items="items"
+                    v-model="application.type"
+            ></v-select>
             <v-text-field
                     :disabled="!isEditing"
                     color="white"
-                    label="Job"
-            ></v-text-field>
-            <v-text-field
-                    :disabled="!isEditing"
-                    color="white"
-                    label="Address"
+                    label="Profile"
+                    v-model="application.profile"
             ></v-text-field>
         </v-card-text>
         <v-divider></v-divider>
@@ -61,7 +66,7 @@
                 bottom
                 left
         >
-            Your profile has been updated
+            Your profile has been submitted
         </v-snackbar>
     </v-card>
 </template>
@@ -75,20 +80,20 @@
                 hasSaved: false,
                 isEditing: null,
                 model: null,
-                states: [
-                    {name: 'Florida', abbr: 'FL', id: 1},
-                    {name: 'Georgia', abbr: 'GA', id: 2},
-                    {name: 'Nebraska', abbr: 'NE', id: 3},
-                    {name: 'California', abbr: 'CA', id: 4},
-                    {name: 'New York', abbr: 'NY', id: 5},
-                ],
+                items: ['','Expert', 'Enterprise', 'Association'],
+                application:{},
             }
         },
-
         methods: {
             save() {
+              console.log(this.application)
+              this.$api.application.createApplication(this.application).then(res => {
+                console.log(res.data);
+                // this.$router.push("/admin/associations");
                 this.isEditing = !this.isEditing
                 this.hasSaved = true
+              })
+
             },
         },
     }

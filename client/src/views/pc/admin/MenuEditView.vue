@@ -8,19 +8,19 @@
     ></v-text-field>
     <v-text-field
         v-model="menu.link"
-        label="Please enter the menu name"
+        label="Please enter the menu link"
         prepend-icon="mdi-bookmark-minus-outline"
         required
     ></v-text-field>
     <v-text-field
         v-model="menu.icon"
-        label="Please enter the menu name"
+        label="Please enter the menu icon"
         prepend-icon="mdi-bookmark-minus-outline"
         required
     ></v-text-field>
     <v-text-field
         v-model="menu.order"
-        label="Please enter the menu name"
+        label="Please enter the menu order"
         prepend-icon="mdi-bookmark-minus-outline"
         required
     ></v-text-field>

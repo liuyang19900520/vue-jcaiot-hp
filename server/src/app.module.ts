@@ -16,6 +16,7 @@ import { AssociationModule } from './association/association.module';
 import { EnterpriseModule } from './enterprise/enterprise.module';
 import { ExpertModule } from './expert/expert.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { ApplicationUserModule } from './applications/application.module';
 
 
 @Module({
@@ -66,7 +67,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
       }),
       inject: [ConfigService],
     }),
-    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule, EnterpriseModule, ExpertModule,
+    BannerModule, AuthModule, MenuModule, PostModule, AssociationModule, EnterpriseModule, ExpertModule, ApplicationUserModule,
   ],
   providers: [
     {

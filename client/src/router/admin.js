@@ -10,6 +10,7 @@ import ExpertListView from "@/views/pc/admin/ExpertListView";
 import ExpertEditView from "@/views/pc/admin/ExpertEditView";
 import MenuListView from "@/views/pc/admin/MenuListView";
 import MenuEditView from "@/views/pc/admin/MenuEditView";
+import ApplicatioinListView from "@/views/pc/admin/ApplicatioinListView";
 
 
 const adminRouter = {
@@ -112,6 +113,12 @@ const adminRouter = {
             path: '/admin/experts/:expertId/md',
             components: {
                 'dashboard': ExpertEditView
+            }
+        },
+        {
+            path: '/admin/applications',
+            components: {
+                'dashboard': ApplicatioinListView
             }
         },
     ]

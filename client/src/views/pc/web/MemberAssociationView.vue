@@ -19,7 +19,7 @@
           </v-avatar>
           <v-spacer></v-spacer>
           <h2>
-            Header {{ item.name }}
+             {{ item.name }}
           </h2>
         </v-expansion-panel-header>
         <v-expansion-panel-content>{{ item.detail }}</v-expansion-panel-content>

@@ -99,7 +99,6 @@ export default {
     deletePost(postId) {
       confirm('Are you sure you want to delete this item?')
       && this.$api.post.deletePost(postId).then(res => {
-        console.log(res);
         if (res.code === '0') {
           this.initialize();
         }

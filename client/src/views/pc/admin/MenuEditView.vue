@@ -84,7 +84,6 @@ export default {
       this.menu.picture = this.pictureUrl;
       this.menu.updateUser = storage.get("username");
       this.menu.updateTime = new Date();
-      console.log(this.menu)
     }
   },
 

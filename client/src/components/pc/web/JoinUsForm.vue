@@ -86,10 +86,8 @@
         },
         methods: {
             save() {
-              console.log(this.application)
               this.$api.application.createApplication(this.application).then(res => {
                 console.log(res.data);
-                // this.$router.push("/admin/associations");
                 this.isEditing = !this.isEditing
                 this.hasSaved = true
               })

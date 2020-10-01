@@ -1,23 +1,15 @@
 <template>
-  <div class="center80">
+  <div>
     <v-expansion-panels
         v-model="panel"
         multiple
     >
       <v-expansion-panel
-          v-for="(item,i) in enterprises"
+          v-for="(item,i) in associations"
           :key="i"
       >
+        <v-img :src="item.picture"></v-img>
         <v-expansion-panel-header>
-          <v-avatar
-              class="profile"
-              color="grey"
-              size="120"
-              tile
-          >
-            <v-img :src="item.picture"></v-img>
-          </v-avatar>
-          <v-spacer></v-spacer>
           <h2>
              {{ item.name }}
           </h2>
@@ -30,17 +22,17 @@
 
 <script>
 export default {
-  name: "MemberEnterprise",
+  name: "MemberAssociationView",
 
   data() {
     return {
       panel: [],
-      enterprises: [],
+      associations: [],
     }
   },
   methods: {
     all() {
-      for (let m = 0; m < this.enterprises.length; m++) {
+      for (let m = 0; m < this.associations.length; m++) {
         if (!this.panel.includes(m)) {
           this.panel.push(m);
         }
@@ -50,24 +42,19 @@ export default {
     none() {
       this.panel = []
     },
-    findEnterprises: function () {
-      this.$api.enterprise.selectEnterprises().then(res => {
-        this.enterprises = res.data;
+    findAssociations: function () {
+      this.$api.association.selectAssociations().then(res => {
+        this.associations = res.data;
         this.all();
       })
     },
   }
   ,
   mounted() {
-    this.findEnterprises();
-
+    this.findAssociations();
   }
 }
 </script>
 
 <style scoped>
-.center80 {
-  margin-left: 10%;
-  margin-right: 10%;
-}
 </style>

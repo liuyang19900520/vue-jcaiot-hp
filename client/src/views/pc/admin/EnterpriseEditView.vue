@@ -79,7 +79,6 @@ export default {
       this.enterprise.picture = this.pictureUrl;
       this.enterprise.updateTime=new Date();
       this.enterprise.updateUser=storage.get("username");
-      console.log(this.enterprise)
     }
   },
 

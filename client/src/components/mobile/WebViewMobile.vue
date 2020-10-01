@@ -55,6 +55,7 @@
 
 <script>
 import routerUtils from "../../utils/routerUtils";
+import moment from "moment";
 
 export default {
   name: "WebView",
@@ -72,12 +73,12 @@ export default {
     changeLang: function(lang) {
       this.$store.dispatch("message/setLang", lang);
       let toPath = this.createLangUrl();
-      console.log(toPath);
       this.$router.push(toPath);
       this.$i18n.locale = lang;
     }
   },
   created() {
-  }
+  },
+
 };
 </script>

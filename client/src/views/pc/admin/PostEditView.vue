@@ -48,7 +48,6 @@ export default {
       s3Utils.addPictureInsidePost($file).then((url) => {
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         // $vm.$img2Url 详情见本页末尾
-        console.log(url);
         this.$refs.md.$img2Url(pos, url);
       })
     },
@@ -61,7 +60,6 @@ export default {
     },
     upload() {
       const file = this.uploadFile;
-      alert(file);
       if (file) {
         let url = s3Utils.addPhoto("posts", file);
         url.then((value) => {
@@ -80,7 +78,6 @@ export default {
     },
     findPost: function (id) {
       this.$api.post.findPostById(id).then(res => {
-        console.log(res.data);
         this.title = res.data.title;
         this.summary = res.data.summary;
         this.mainPicture = res.data.mainPic;
@@ -89,8 +86,9 @@ export default {
     },
     createPost: function () {
       this.$api.post.createPost(this.post).then(res => {
-        console.log(res.data);
-        this.$router.push("/admin/posts");
+        if(res.code==='0'){
+          this.$router.push("/admin/posts");
+        }
       })
     },
     updatePost: function () {
@@ -106,7 +104,6 @@ export default {
       this.post.content = this.content;
       this.post.updateUser=storage.get("username");
       this.post.updateTime = new Date();
-      console.log(this.post)
     }
   },
   created() {

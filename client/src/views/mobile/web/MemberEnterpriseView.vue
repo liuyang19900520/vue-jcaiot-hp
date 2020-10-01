@@ -1,5 +1,5 @@
 <template>
-  <div class="center80">
+  <div>
     <v-expansion-panels
         v-model="panel"
         multiple
@@ -8,16 +8,8 @@
           v-for="(item,i) in enterprises"
           :key="i"
       >
+        <v-img :src="item.picture"></v-img>
         <v-expansion-panel-header>
-          <v-avatar
-              class="profile"
-              color="grey"
-              size="120"
-              tile
-          >
-            <v-img :src="item.picture"></v-img>
-          </v-avatar>
-          <v-spacer></v-spacer>
           <h2>
              {{ item.name }}
           </h2>
@@ -66,8 +58,4 @@ export default {
 </script>
 
 <style scoped>
-.center80 {
-  margin-left: 10%;
-  margin-right: 10%;
-}
 </style>

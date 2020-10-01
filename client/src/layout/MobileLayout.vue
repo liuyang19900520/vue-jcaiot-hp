@@ -104,7 +104,6 @@ export default {
   methods: {
     link2pageLogin: function () {
       this.$api.auth.profile().then(res => {
-        console.log(res);
         if (res.code === '0') {
           this.$router.push("/admin")
         } else {

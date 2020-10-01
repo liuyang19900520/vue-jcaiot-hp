@@ -30,7 +30,6 @@
         methods: {
             findPost: function (id) {
                 this.$api.post.findPostById(id).then(res => {
-                    console.log(res.data);
                     this.title = res.data.title;
                     this.mainPicture = res.data.mainPic;
                     this.mkValue = res.data.content;
@@ -38,7 +37,6 @@
             },
         },
         mounted() {
-            console.log(this.$route.params.postId)
             this.findPost(this.$route.params.postId);
 
         }

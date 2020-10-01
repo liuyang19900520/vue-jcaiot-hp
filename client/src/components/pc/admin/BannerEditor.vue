@@ -58,7 +58,6 @@ export default {
   methods: {
     getBanner: function () {
       this.$api.banner.selectBanner(this.tabLang).then(res => {
-        console.log(res);
         if (res.code === '0') {
           this.bannerTitle = res.data.banner;
           this.bannerContent = res.data.content;
@@ -71,7 +70,6 @@ export default {
     },
     submit: function () {
       this.$api.banner.editBanner(this.tabLang, this.bannerTitle, this.bannerContent,Date.now(),storage.get("username")).then(res => {
-        console.log(res)
         if (res.code === '0') {
           this.snackbar = true;
           this.text = "Success";

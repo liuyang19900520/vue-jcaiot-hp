@@ -79,7 +79,6 @@ export default {
       this.expert.picture = this.pictureUrl;
       this.expert.updateTime =new Date();
       this.expert.updateUser=storage.get("username");
-      console.log(this.expert)
     }
   },
 

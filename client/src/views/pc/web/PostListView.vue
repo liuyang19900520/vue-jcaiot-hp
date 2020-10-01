@@ -65,7 +65,6 @@ export default {
     link2Page: routerUtils.link2page,
     findPostsList: function (pageNo, pageCount) {
       this.$api.post.selectPostsByPage(pageNo, pageCount).then(res => {
-        console.log(res.data.content);
         this.posts = res.data.content;
         this.pageCount = res.data.countAll;
       })

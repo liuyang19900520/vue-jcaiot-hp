@@ -32,7 +32,7 @@ const errorHandle = (status, other) => {
         // 403 token过期
         // 清除token并跳转登录页
         case 403:
-            console.log('登录过期，请重新登录');
+            console.error('登录过期，请重新登录');
             storage.remove("accessToken");
             storage.remove("username");
             setTimeout(() => {
@@ -41,10 +41,10 @@ const errorHandle = (status, other) => {
             break;
         // 404请求不存在
         case 404:
-            console.log('请求的资源不存在');
+            console.error('请求的资源不存在');
             break;
         default:
-            console.log(other);
+            console.error(other);
     }
 };
 
@@ -53,7 +53,6 @@ instance.interceptors.request.use(
     function (config) {
         // 在发送请求之前做些什么
         let token = storage.get("accessToken");
-        console.log('accessToken in the interceptors=====' + token);
         if (token != null) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }

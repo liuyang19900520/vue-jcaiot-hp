@@ -82,7 +82,6 @@ export default {
       // this.association.updateTime = dateNow.getFullYear() + '/'
       //     + (dateNow.getMonth() + 1 < 10 ? '0' + (dateNow.getMonth() + 1) : dateNow.getMonth() + 1) + '/'
       //     + (dateNow.getDate() < 10 ? '0' + (dateNow.getDate()) : dateNow.getDate())
-      console.log(this.association)
     }
   },
 

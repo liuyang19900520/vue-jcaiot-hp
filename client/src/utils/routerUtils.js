@@ -20,8 +20,6 @@ const routerUtils = {
     createLangUrl() {
         let toLang = this.$store.state.message.lang;
         let toPath = this.$route.path;
-        console.log("toPath", toPath);
-        console.log("toLang", toLang);
         if (toPath.startsWith("/en")) {
             toPath = toPath.replace("/en", "");
         } else if (toPath.startsWith("/jp")) {
@@ -38,8 +36,6 @@ const routerUtils = {
         if (toPath.startsWith("//") ) {
             toPath = toPath.slice(1);
         }
-
-        console.log("result", toPath);
         return toPath;
     }
 };

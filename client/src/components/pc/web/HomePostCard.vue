@@ -11,7 +11,7 @@
       <v-card-title>{{ postTitle }}</v-card-title>
     </v-img>
 
-    <v-card-subtitle class="pb-0">{{ postTime }}</v-card-subtitle>
+    <v-card-subtitle class="pb-0">{{ postTime |moment}}</v-card-subtitle>
 
     <v-card-text class="text--primary">
       <div>{{ postSummary }}</div>
@@ -28,6 +28,7 @@
 
 <script>
 import routerUtils from "@/utils/routerUtils";
+import moment from "moment";
 
 export default {
   name: "HomePostCard",
@@ -43,6 +44,11 @@ export default {
   },
   methods:{
     link2Page: routerUtils.link2page,
+  },
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm:ss');
+    }
   }
 }
 </script>

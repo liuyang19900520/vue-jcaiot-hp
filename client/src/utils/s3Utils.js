@@ -31,8 +31,6 @@ const {S3, ListObjectsCommand} = require("@aws-sdk/client-s3");
 const REGION = process.env.VUE_APP_REGION; //REGION
 // Initialize the Amazon Cognito credentials provider
 const region = process.env.VUE_APP_REGION; //REGION
-console.log(REGION);
-console.log(region);
 
 const s3 = new S3({
     region: REGION,

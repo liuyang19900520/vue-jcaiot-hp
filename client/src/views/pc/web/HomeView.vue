@@ -62,7 +62,6 @@
             },
             getPostMain: function (num) {
                 this.$api.post.selectMainPosts(num).then(res => {
-                    console.log(res);
                     this.posts = res.data;
                 })
             },

@@ -29,6 +29,7 @@ const webRouter =
                 path: '/posts',
                 components: {
                     'pc-web': PostListView,
+                    'mobile-web': PostListView,
                 },
             }, {
                 path: '/:lang(jp|en)/posts',

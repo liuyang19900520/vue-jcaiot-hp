@@ -5,6 +5,8 @@ import MobileLayout from "../layout/MobileLayout";
 import MobileHomeView from "../views/mobile/web/MobileHomeView";
 import PostListView from "../views/pc/web/PostListView";
 import PostView from "../views/pc/web/PostView";
+import MobilePostListView from "@/views/mobile/web/MobilePostListView";
+import MobilePostView from "@/views/mobile/web/MobilePostView";
 
 const webRouter =
     {
@@ -29,27 +31,31 @@ const webRouter =
                 path: '/posts',
                 components: {
                     'pc-web': PostListView,
-                    'mobile-web': PostListView,
+                    'mobile-web': MobilePostListView,
                 },
             }, {
                 path: '/:lang(jp|en)/posts',
                 components: {
                     'pc-web': PostListView,
+                    'mobile-web': MobilePostListView,
                 },
             }, {
                 path: '/posts/:postId',
                 components: {
                     'pc-web': PostView,
+                    'mobile-web': MobilePostView,
                 },
             }, {
                 path: '/:lang(jp|en)/posts/:postId',
                 components: {
                     'pc-web': PostView,
+                    'mobile-web': MobilePostView,
                 },
             }, {
                 path: '/members',
                 components: {
                     'pc-web': MemberView,
+                    'mobile-web': MobilePostView,
                 },
             }, {
                 path: '/:lang(jp|en)/members',

@@ -1,26 +1,23 @@
 <template>
   <div>
-    <v-row dense class="center80">
+    <v-row dense>
       <v-col
           v-for="(item, i) in posts"
           :key="i"
           cols="12"
       >
         <v-card class="item-margin">
+
+          <v-img :src="item.mainPic"></v-img>
+
           <div class="d-flex flex-no-wrap">
-            <v-avatar
-                class="ma-3"
-                size="180"
-                tile
-            >
-              <v-img :src="item.mainPic"></v-img>
-            </v-avatar>
+
             <div>
               <v-card-title
                   class="headline"
                   v-text="item.title"
               ></v-card-title>
-              <v-card-subtitle>{{item.updateTime| moment}}</v-card-subtitle>
+              <v-card-subtitle>{{ item.updateTime| moment }}</v-card-subtitle>
               <v-card-text class="text--primary">
                 <div>
                   {{ item.summary }}
@@ -70,7 +67,8 @@ export default {
         this.pageCount = res.data.countAll;
       })
     },
-  }, created() {
+  },
+  created() {
     this.pageNo = 1;
     this.findPostsList(this.pageNo - 1, 3);
   },
@@ -81,17 +79,13 @@ export default {
   },
   filters: {
     moment: function (date) {
-      return moment(date).format('YYYY/MM/DD HH:mm:ss');
+      return moment(date).format('YYYY/MM/DD');
     }
   }
 }
 </script>
 
 <style scoped>
-.center80 {
-  margin-left: 10%;
-  margin-right: 10%;
-}
 
 .item-margin {
   margin-bottom: 3%;

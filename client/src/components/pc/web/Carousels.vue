@@ -15,16 +15,16 @@
             return {
                 items: [
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                        src: 'https://jcaiot.s3-ap-northeast-1.amazonaws.com/posts/1601644810391_5.jpg',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+                        src: 'https://jcaiot.s3-ap-northeast-1.amazonaws.com/posts/1601644969581_6.jpg',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+                        src: 'https://jcaiot.s3-ap-northeast-1.amazonaws.com/posts/1601643628737_3.jpg',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+                        src: 'https://jcaiot.s3-ap-northeast-1.amazonaws.com/posts/1601643719558_4.jpeg',
                     },
                 ],
             }

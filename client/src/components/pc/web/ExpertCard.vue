@@ -4,8 +4,9 @@
       width="344"
   >
     <v-img :src="this.picture" height="200px"></v-img>
-    <v-card-title>
-      {{ this.name }}
+    <v-card-title >
+      <div>{{ this.name }}</div>
+
     </v-card-title>
     <v-card-subtitle>
       {{ this.detail }}
@@ -31,6 +32,9 @@ export default {
 
 .expert-card-view-margin {
   margin-bottom: 2%;
+
 }
+
+
 
 </style>

@@ -29,7 +29,7 @@
             <h3>加入我们</h3>
             <br/>
             <div class="join-us-div">
-                <v-img class="join-us-item" src="https://picsum.photos/510/300?random" aspect-ratio="1.7"></v-img>
+                <v-img class="join-us-item" src="https://jcaiot.s3-ap-northeast-1.amazonaws.com/posts/1601645278533_join.jpeg" aspect-ratio="1.7"></v-img>
                 <div class="join-us-item">
                     <JoinUsForm></JoinUsForm>
                 </div>

@@ -21,12 +21,12 @@ export class PostService {
   }
 
   async findMain(num: number): Promise<PostDocument[]> {
-    return this.postModel.find().limit(Number(num));
+    return this.postModel.find(null,null,{sort:{'updateTime':-1}}).limit(Number(num));
   }
 
   async findPostList(pageNo: number, pageCount: number): Promise<any> {
     const skipCount = pageCount * pageNo;
-    const content = await this.postModel.find().skip(skipCount).limit(Number(pageCount));
+    const content = await this.postModel.find(null,null,{sort:{'updateTime':-1}}).skip(skipCount).limit(Number(pageCount));
     const countAll = Math.ceil(await this.postModel.countDocuments() / pageCount);
     const result = { 'content': content, 'countAll': countAll };
     return result;

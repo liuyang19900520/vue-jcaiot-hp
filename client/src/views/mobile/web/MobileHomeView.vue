@@ -3,7 +3,7 @@
     <div class="block">
       <h2 class="center">{{bannerTitle}}</h2>
       <br/>
-      <Carousels class="carousels"></Carousels>
+      <Carousels class="carousels" ></Carousels>
       <br/>
       <h4>{{bannerContent}}
       </h4>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Carousels from "../../../components/pc/web/Carousels";
+import Carousels from "../../../components/mobile/web/Carousels";
 import MobileHomePostCard from "../../../components/mobile/web/MobileHomePostCard";
 import JoinUsForm from "../../../components/pc/web/JoinUsForm";
 import routerUtils from '../../../utils/routerUtils';
@@ -128,10 +128,6 @@ export default {
 
 .post-more-button {
   width: 15%;
-}
-
-.carousels {
-
 }
 
 </style>

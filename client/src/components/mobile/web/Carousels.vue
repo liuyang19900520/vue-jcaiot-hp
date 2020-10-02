@@ -1,6 +1,6 @@
 <template>
-  <v-carousel hide-delimiters class="card">
-    <v-carousel-item ref="m" class="v-carousel_item" style="width: 350px"
+  <v-carousel hide-delimiters height="250">
+    <v-carousel-item ref="m"
                      v-for="(item,i) in items"
                      :key="i"
                      :src="item.src"
@@ -30,23 +30,13 @@ export default {
     }
   },
   mounted() {
-    this.$refs.m[0].$el.firstChild.style.cssText="height:250px";
-    console.log(this.$refs.m)
+
+    console.log(this.$refs.m[0].$el.firstChild.style.cssText)
   }
 }
 </script>
 
 <style scoped>
-.card {
-  height: 250px !important;
-  width: 350px !important;
-  border: 1px solid black;
-}
-
-.v-carousel__item {
-  width: 350px !important;
-  height: 250px !important;
-}
 
 
 </style>
